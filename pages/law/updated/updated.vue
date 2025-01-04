@@ -1,13 +1,38 @@
 <template>
 	<!--本文件由FirstUI授权予向*磊（会员ID：3  78 9）专用，请尊重知识产权，勿私下传播，违者追究法律责任。-->
 	<view class="fui-wrap fui-page__bd">
-		<fui-list-cell bottom-right="32" arrow v-for="(item,index) in logs" :key="index"
-			@click="detail(item.date,item.version)">
-			<view>
-				<view class="fui-title">First UI {{item.version}} 主要更新</view>
-				<view class="fui-date">{{item.date}}</view>
-			</view>
-		</fui-list-cell>
+		<fui-swipeaction-group>
+			<fui-swipe-action :autoClose="false" :buttons="buttons" @click="onClick">
+				<fui-list-cell :padding="['36rpx','32rpx']" :highlight="false" @click="onTap">
+					<view class="fui-align__center">
+						<view class="fui-item__img-box">
+							<image class="fui-item__img" src="/static/images/common/icon_tabbar_3x.png" mode="widthFix">
+							</image>
+							<fui-badge absolute type="danger"></fui-badge>
+						</view>
+						<view>
+							<view>联系人名称</view>
+							<text class="fui-page__desc">摘要信息</text>
+						</view>
+					</view>
+				</fui-list-cell>
+			</fui-swipe-action>
+			<fui-swipe-action :autoClose="false" :buttons="buttons" @click="onClick">
+				<fui-list-cell :padding="['36rpx','32rpx']" :highlight="false" @click="onTap">
+					<view class="fui-align__center">
+						<view class="fui-item__img-box">
+							<image class="fui-item__img" src="/static/images/common/icon_tabbar_3x.png" mode="widthFix">
+							</image>
+							<fui-badge absolute type="danger"></fui-badge>
+						</view>
+						<view>
+							<view>联系人名称</view>
+							<text class="fui-page__desc">摘要信息</text>
+						</view>
+					</view>
+				</fui-list-cell>
+			</fui-swipe-action>
+		</fui-swipeaction-group>
 	</view>
 </template>
 
@@ -21,61 +46,22 @@
 				}, {
 					date: '2024.02.19',
 					version: 'V2.3.0'
-				}, {
-					date: '2023.11.09',
-					version: 'V2.2.0'
-				}, {
-					date: '2023.10.18',
-					version: 'V2.1.0'
-				}, {
-					date: '2023.07.17',
-					version: 'V2.0.0'
-				}, {
-					date: '2023.06.25',
-					version: 'V1.9.9'
-				}, {
-					date: '2023.05.29',
-					version: 'V1.9.8'
-				}, {
-					date: '2023.05.04',
-					version: 'V1.9.5'
-				}, {
-					date: '2023.04.04',
-					version: 'V1.9.1'
-				}, {
-					date: '2023.03.17',
-					version: 'V1.9.0'
-				}, {
-					date: '2023.01.31',
-					version: 'V1.8.0'
-				}, {
-					date: '2022.09.28',
-					version: 'V1.7.0'
-				}, {
-					date: '2022.06.26',
-					version: 'V1.6.0'
-				}, {
-					date: '2022.05.18',
-					version: 'V1.5.0'
-				}, {
-					date: '2022.03.16',
-					version: 'V1.4.0'
-				}, {
-					date: '2021.12.31',
-					version: 'V1.3.0'
-				}, {
-					date: '2021.11.22',
-					version: 'V1.2.0'
-				}, {
-					date: '2021.09.07',
-					version: 'V1.1.0'
-				}, {
-					date: '2021.08.02',
-					version: 'V1.0.0'
+				}],
+				buttons: [{
+					text: '取消收藏',
+					background: '#FF2B2B'
 				}]
 			}
 		},
 		methods: {
+			onClick(e) {
+				console.log(e)
+				this.fui.toast('取消收藏成功!')
+			},
+			onTap() {
+				//列表点击事件，此处也可关闭菜单
+				this.fui.toast('滑动可以取消收藏～')
+			},
 			detail(date, version) {
 				this.fui.href(`../log/log?date=${date}&version=${version}`)
 			}
@@ -103,5 +89,27 @@
 		font-size: 24rpx;
 		color: #B2B2B2;
 		padding-top: 8rpx;
+	}
+
+	.fui-section__title {
+		margin-left: 32rpx;
+	}
+
+	.fui-list__item {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.fui-item__img-box {
+		position: relative;
+		margin-right: 24rpx;
+	}
+
+	.fui-item__img {
+		width: 96rpx;
+		height: 96rpx;
+		display: block;
 	}
 </style>

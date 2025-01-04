@@ -5,7 +5,7 @@
 			<!--注意：联动时，tabIndex属性为必传参数-->
 			<fui-vtabs-content v-for="(item,index) in vtabs" :key="index" :tabIndex="index">
 				<view class="fui-vtabs-content__item" :style="{paddingBottom:vtabs.length-1===index?'800px':'0'}">
-					<view class="fui-content--box">
+					<view class="fui-content--box" @click="hrefText(item)">
 						<text class="fui-title">{{item.title || item.name}}</text>
 						<image class="fui-img" :src="resUrl+item.img" mode="widthFix"></image>
 						<text class="fui-descr">{{item.descr}}</text>
@@ -76,6 +76,11 @@
 			})
 		},
 		methods: {
+			hrefText(value) {
+				let url = '/pages/law/richText/richText?_id='+value.name;
+				console.log(value,url)
+				this.fui.href(url)
+			},
 			onTabClick(e) {
 				const index = e.index
 				// console.log('tabClick', index)

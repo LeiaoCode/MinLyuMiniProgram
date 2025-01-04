@@ -6,7 +6,7 @@
 		</view>
 		<view class="fui-page__spacing">
 			<view class="fui-menu__wrap fui-align__center">
-				<view class="fui-menu__item" v-for="(item,index) in menus" :key="index" @click="href(item.page,$event)">
+				<view class="fui-menu__item" v-for="(item,index) in menus" :key="index" @tap="href(item.page,$event)">
 					<button open-type="feedback" class="fui-btn__feedback" v-if="index===2"></button>
 					<view class="fui-menu__img fui-flex__center" :style="{background:item.background}">
 						<image :src="`${resUrl}/my/light/icon_${item.src}_3x.png`" mode="widthFix"></image>
@@ -41,37 +41,28 @@
 					text: '分享好友',
 					background: '#F2FCF6',
 					src: 'share',
-					page: '/pages/my/share/share'
+					page: 'share'
 				}, {
-					text: '赞赏FirstUI',
+					text: '律师入驻',
 					background: '#FFFBF2',
 					src: 'appreciate',
 					page: 'appreciate'
 				}, {
-					text: '意见反馈',
+					text: '联系律师',
 					background: '#F6F7FF',
 					src: 'proposal',
-					page: 'feedback'
+					page: '/pages/law/indexList/indexList-A'
 				}, {
-					text: '我要合作',
+					text: '法律案例',
 					background: '#FFF4F4',
 					src: 'cooperation',
-					page: '/pages/my/cooperate/cooperate'
+					page: '/pages/law/vtabs/vtabs'
 				}],
 				list: [{
 						text: '我的收藏',
 						src: 'edition',
 						page: '/pages/law/updated/updated'
 					}, 
-					// {
-					// 	text: '开源地址',
-					// 	src: 'address',
-					// 	page: '/pages/my/website/website'
-					// }, {
-					// 	text: '帮助中心',
-					// 	src: 'help',
-					// 	page: '/pages/my/help/help'
-					// },
 					{
 						text: '关于我们',
 						src: 'aboutus',
@@ -117,7 +108,28 @@
 						urls: [urls]
 					});
 					// #endif
+				} else if (page === 'share') {
+
 				} else if (page === 'feedback') {
+					let text = '复制 Issue 链接地址';
+
+					// #ifdef MP-TOUTIAO || MP-BAIDU
+					//头条/百度文字length<=4
+					text = '反馈链接';
+					if (this.status == 0) {
+						this.fui.toast('功能完善中~')
+						return;
+					}
+					// #endif
+
+					// #ifndef APP-PLUS || MP-WEIXIN || MP-QQ
+					this.fui.modal('意见反馈', '在以任何形式的参与前，请先阅读文档开发指南。如有任何的意见或建议，欢迎您通过创建 Issue 的方式告知我们。', (res) => {
+						if (res) {
+							this.getLink('https://github.com/FirstUI/FirstUI/issues', e)
+						}
+					}, false, '', text)
+					// #endif
+				}else if (page === 'feedback') {
 					let text = '复制 Issue 链接地址';
 
 					// #ifdef MP-TOUTIAO || MP-BAIDU

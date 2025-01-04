@@ -3,15 +3,17 @@
 		<view class="fui-page__bd">
 			<!-- 布局内容 start -->
 			<!-- app-nvue、字节跳动小程序、飞书小程序不支持 previous-margin、next-margin-->
-			<fui-swiper-dot :items="items" :current="current">
-				<swiper previous-margin="60rpx" next-margin="60rpx" class="fui-card__swiper" @change="change" circular
-					:indicator-dots="false" autoplay :interval="5000" :duration="150">
-					<swiper-item v-for="(item,index) in items" :key="index" class="fui-cs__swiper-item">
-						<view class="fui-cardswiper__item" :class="{'fui-cardswiper__scale':current!==index}">
-							<image :src="item.src" class="fui-cardswiper__img"></image>
-						</view>
-					</swiper-item>
-				</swiper>
+			<fui-swiper-dot :items="items" :current="current2" :styles="styles">
+				<view class="fui-cardswiper__box">
+					<swiper class="fui-card__swiper-wrap" @change="change2" circular :indicator-dots="false" autoplay
+						:interval="5000" :duration="150">
+						<swiper-item v-for="(item,index) in items" :key="index" class="fui-cs__swiper-item">
+							<view class="fui-cardswiper__item">
+								<image :src="item.src" class="fui-cardswiper__img"></image>
+							</view>
+						</swiper-item>
+					</swiper>
+				</view>
 			</fui-swiper-dot>
 			<!-- 快速咨询 -->
 			<view class="fui-section__title">快速咨询</view>
