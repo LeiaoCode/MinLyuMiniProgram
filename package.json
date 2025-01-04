@@ -1,0 +1,15 @@
+{
+	"uni-app": {
+		"scripts": {
+			"mp-dingtalk": {
+				"title": "民律在线",
+				"env": {
+					"UNI_PLATFORM": "mp-alipay"
+				},
+				"define": {
+					"MP-DINGTALK": true
+				}
+			}
+		}
+	}
+}
