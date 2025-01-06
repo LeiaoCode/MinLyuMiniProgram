@@ -265,7 +265,8 @@
 				loaded: false,
 				isPC: false,
 				nvueAndroid: false,
-				isNvue: isNvue
+				isNvue: isNvue,
+				index: 0 
 			};
 		},
 		mounted() {
@@ -286,6 +287,9 @@
 			})
 		},
 		methods: {
+			model(){
+				
+			},
 			//滚动到底部，会触发 scrolltolower 事件
 			scrolltolower() {
 				this.$emit('scrolltolower', {})
