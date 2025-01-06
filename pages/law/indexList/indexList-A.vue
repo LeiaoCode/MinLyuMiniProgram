@@ -6,7 +6,10 @@
 			<fui-loadmore v-if="!show"></fui-loadmore>
 			<fui-divider text="66个朋友及联系人" v-if="show"></fui-divider>
 		</template>
+		<fui-actionsheet :show="showAc" :tips="tips" :itemList="itemList" @click="itemAcClick"
+			@cancel="cancel"></fui-actionsheet>
 	</fui-index-list>
+
 </template>
 
 <script>
@@ -16,7 +19,14 @@
 			return {
 				//如果是请求数据返回，返回后直接整体赋值给lists（注意数据格式正确）
 				lists: lists,
-				show: false
+				show: false,
+				showAc: false,
+				tips: '退出后不会删除任何历史数据，下次登录依然可以使用本账号。',
+				itemList: [{
+					text: '退出登录',
+					color: '#FF2B2B'
+				}],
+				user:{}
 			}
 		},
 		onLoad() {
@@ -34,8 +44,28 @@
 				// ...
 			},
 			itemClick(e) {
+				this.user=e;
+				this.tips = '';
+				this.isCancel = true;
+				this.itemList = ['查看', '收藏']
+				this.theme = 'dark'
+				setTimeout(() => {
+					this.showAc = true
+				}, 50)
 				console.log(e)
-				this.fui.href("/pages/law/skeleton/skeleton?index=2&title="+e.text)
+			},
+			itemAcClick(e) {
+				console.log(e)
+				if (e.text == '查看') {
+					console.log(this.user.text)
+					this.fui.href("/pages/law/skeleton/skeleton?index=2&title=" + e.text)
+				} else {
+					this.fui.toast('收藏成功')
+				}
+				this.cancel()
+			},
+			cancel() {
+				this.showAc = false
 			}
 		}
 	}
