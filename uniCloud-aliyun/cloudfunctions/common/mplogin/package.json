@@ -1,0 +1,19 @@
+{
+    "name": "mplogin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "iconv-lite": "^0.4.15"
+    },
+    "origin-plugin-dev-name": "nx-login",
+    "origin-plugin-version": "1.0",
+    "plugin-dev-name": "nx-login",
+    "plugin-version": "1.0"
+}

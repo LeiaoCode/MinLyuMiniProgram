@@ -1,0 +1,101 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"title": "律师信息表",
+	"required": ["lawyer_name", "license_number", "email", "law_firm", "contact_phone"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"lawyer_name": {
+			"bsonType": "string",
+			"title": "律师名称",
+			"description": "律师的全名"
+		},
+		"license_number": {
+			"bsonType": "string",
+			"title": "执业证号",
+			"description": "律师的执业证号"
+		},
+		"email": {
+			"bsonType": "string",
+			"title": "邮箱",
+			"description": "律师的邮箱地址",
+			"pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+		},
+		"law_firm": {
+			"bsonType": "string",
+			"title": "执业律所",
+			"description": "律师所在的律所名称"
+		},
+		"contact_phone": {
+			"bsonType": "string",
+			"title": "联系电话",
+			"description": "律师的联系电话",
+			"pattern": "^\\+?[0-9\\-]{7,15}$"
+		},
+		"contact_address": {
+			"bsonType": "string",
+			"title": "联系地址",
+			"description": "律师的联系地址"
+		},
+		"legal_specialty": {
+			"bsonType": "array",
+			"title": "法律专长",
+			"description": "律师的专业领域",
+			"items": {
+				"bsonType": "string"
+			}
+		},
+		"practice_slogan": {
+			"bsonType": "string",
+			"title": "执业感言",
+			"description": "律师的执业感言"
+		},
+		"douyin_account": {
+			"bsonType": "string",
+			"title": "抖音号",
+			"description": "律师的抖音账号"
+		},
+		"lawyer_intro": {
+			"bsonType": "string",
+			"title": "律师简介",
+			"description": "律师的简要介绍"
+		},
+		"practice_region": {
+			"bsonType": "string",
+			"title": "执业地区",
+			"description": "律师的执业地区"
+		},
+		"personal_photo": {
+			"bsonType": "file",
+			"fileMediaType": "image",
+			"title": "个人照片",
+			"description": "律师个人照片"
+		},
+		"license_photo": {
+			"bsonType": "file",
+			"fileMediaType": "image",
+			"title": "执业证照片",
+			"description": "律师执业证照片"
+		},
+		"showcase_photos": {
+			"bsonType": "file",
+			"fileMediaType": "image",
+			"title": "风采照片",
+			"description": "律师风采照片"
+		},
+		"is_featured": {
+			"bsonType": "bool",
+			"title": "是否推荐页显示",
+			"description": "标记该律师是否显示在推荐页",
+			"default": false
+		}
+	}
+}

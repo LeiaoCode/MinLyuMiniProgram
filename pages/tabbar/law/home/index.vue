@@ -9,7 +9,7 @@
 						:interval="5000" :duration="150">
 						<swiper-item v-for="(item,index) in items" :key="index" class="fui-cs__swiper-item">
 							<view class="fui-cardswiper__item">
-								<image :src="item.src" class="fui-cardswiper__img"></image>
+								<image :src="item.bannerfile.url" class="fui-cardswiper__img"></image>
 							</view>
 						</swiper-item>
 					</swiper>
@@ -43,7 +43,7 @@
 					</fui-grid>
 				</fui-card>
 			</view>
-			
+
 			<view class="fui-card__wrap">
 				<fui-card>
 					<view>
@@ -51,11 +51,11 @@
 							<view>
 								<view class="fui-list" :class="{'fui-mtop':index!==0}" v-for="(list,index) in menuList"
 									:key="index">
-									<view class="fui-list--item fui-mr--52" v-for="(item,idx) in list" :key="item.text">
+									<view class="fui-list--item fui-mr--52" v-for="(item,idx) in list" :key="item.name">
 										<fui-lazyload background="transparent" marginBottom="12" :width="96"
-											:height="96" :src="item.icon" mode="aspectFill">
+											:height="96" :src="item.img.path" mode="aspectFill">
 										</fui-lazyload>
-										<fui-text un-shrink :text="item.text" color="#888" size="24"></fui-text>
+										<fui-text un-shrink :text="item.name" color="#888" size="24"></fui-text>
 									</view>
 								</view>
 							</view>
@@ -63,7 +63,7 @@
 					</view>
 				</fui-card>
 			</view>
-			
+
 			<!-- 推荐律师 -->
 			<view class="fui-section__title">推荐律师</view>
 			<view>
@@ -80,8 +80,8 @@
 							<view class="fui-cell__list">
 								<view class="fui-list__item" v-for="(item,index) in records" :key="index"
 									@click="jump(item)">
-									<fui-avatar :src="item.avatar" marginBottom="20"></fui-avatar>
-									<fui-overflow-hidden :text="item.name" align="center" :size="26" width="128rpx">
+									<fui-avatar :src="item.personal_photo.path" marginBottom="20"></fui-avatar>
+									<fui-overflow-hidden :text="item.lawyer_name" align="center" :size="26" width="128rpx">
 									</fui-overflow-hidden>
 								</view>
 							</view>
@@ -223,10 +223,67 @@
 
 			}
 		},
+		created() {
+			this.getBanners()
+			this.getLegalCategories()
+			this.getLawyers()
+		},
 		methods: {
+			async getBanners() {
+				try {
+					const res = await uniCloud.database().collection('opendb-banner').get();
+					const arr = res.result.data
+					if (arr.length > 0) {
+						this.items = arr; // 保存查询到的数据
+					} else {
+						console.log('No data found in opendb-banner.');
+					}
+				} catch (error) {
+					console.error('Error querying opendb-banner:', error);
+				}
+			},
+			async getLegalCategories() {
+				try {
+					// 查询 legal-categories 数据库
+					const res = await uniCloud.database().collection('legal-categories').get();
+					let arr = res.result.data
+					if (arr.length > 0) {
+						// 将数据分成两个数组
+						this.menuList = this.splitIntoChunks(arr, Math.ceil(arr.length / 2));
+					} else {
+						console.log('未查询到任何数据');
+					}
+				} catch (error) {
+					console.error('查询 legal-categories 失败:', error);
+				}
+			},
+			async getLawyers() {
+				try {
+					const res = await uniCloud.database().collection('lawyers').where({
+						is_featured: true
+					}).get();
+					let arr = res.result.data
+					if (arr.length) {
+						this.records = arr; // 提取 data 部分
+						console.log('查询结果:', this.records);
+					} else {
+						console.error('查询失败，没有结果:', res);
+					}
+				} catch (error) {
+					console.error('查询 lawyers 数据库失败:', error);
+				}
+			},
+			// 将数据分成两个数组
+			splitIntoChunks(data, chunkSize) {
+				const result = [];
+				for (let i = 0; i < data.length; i += chunkSize) {
+					result.push(data.slice(i, i + chunkSize));
+				}
+				return result;
+			},
 			jump(e) {
 				console.log(e)
-				this.fui.href("/pages/law/skeleton/skeleton?index=2&title=" + e.name)
+				this.fui.href("/pages/law/skeleton/skeleton?index=2&_id=" + e._id)
 			},
 			hrefTabs() {
 				let url = '/pages/law/vtabs/vtabs';

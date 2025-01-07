@@ -1,38 +1,20 @@
 <template>
 	<!--本文件由FirstUI授权予向*磊（会员ID：3  78 9）专用，请尊重知识产权，勿私下传播，违者追究法律责任。-->
 	<view class="fui-wrap fui-page__bd">
-		<fui-swipeaction-group>
-			<fui-swipe-action :autoClose="false" :buttons="buttons" @click="onClick">
-				<fui-list-cell :padding="['36rpx','32rpx']" :highlight="false" @click="onTap">
-					<view class="fui-align__center">
-						<view class="fui-item__img-box">
-							<image class="fui-item__img" src="/static/images/common/icon_tabbar_3x.png" mode="widthFix">
-							</image>
-							<fui-badge absolute type="danger"></fui-badge>
-						</view>
-						<view>
-							<view>联系人名称</view>
-							<text class="fui-page__desc">摘要信息</text>
-						</view>
-					</view>
-				</fui-list-cell>
-			</fui-swipe-action>
-			<fui-swipe-action :autoClose="false" :buttons="buttons" @click="onClick">
-				<fui-list-cell :padding="['36rpx','32rpx']" :highlight="false" @click="onTap">
-					<view class="fui-align__center">
-						<view class="fui-item__img-box">
-							<image class="fui-item__img" src="/static/images/common/icon_tabbar_3x.png" mode="widthFix">
-							</image>
-							<fui-badge absolute type="danger"></fui-badge>
-						</view>
-						<view>
-							<view>联系人名称</view>
-							<text class="fui-page__desc">摘要信息</text>
-						</view>
-					</view>
-				</fui-list-cell>
-			</fui-swipe-action>
-		</fui-swipeaction-group>
+		<view v-for="(item, index) in records" :key="index">
+			<fui-list-cell topBorder @click="itemClick(item)" :bottomLeft="104">
+				<view class="fui-align__center">
+					<image class="fui-list__icon" :src="item.src || '/static/images/common/icon_tabbar_3x.png'"
+						mode="widthFix">
+					</image>
+					<text>{{ item.text || '摘要信息' }}</text>
+				</view>
+
+			</fui-list-cell>
+		</view>
+
+		<fui-actionsheet :show="showAc" :tips="tips" :itemList="itemList" @click="itemAcClick"
+			@cancel="cancel"></fui-actionsheet>
 	</view>
 </template>
 
@@ -48,17 +30,105 @@
 					version: 'V2.3.0'
 				}],
 				buttons: [{
+					text: '查看',
+					background: '#465CFF'
+				}, {
 					text: '取消收藏',
 					background: '#FF2B2B'
-				}]
+				}],
+				itemList: [{
+					text: '退出登录',
+					color: '#FF2B2B'
+				}],
+				showAc: false,
+				tips: '退出后不会删除任何历史数据，下次登录依然可以使用本账号。',
+				records: [],
+				user: ''
 			}
 		},
+		created() {
+			this.getFavorites()
+		},
 		methods: {
+			async itemClick(e) {
+				this.user = e;
+				console.log(this.user)
+				this.tips = '';
+				this.isCancel = true;
+				// 动态设置菜单项
+				this.itemList = ['查看', '取消收藏'];
+				this.theme = 'dark'
+				setTimeout(() => {
+					this.showAc = true
+				}, 50)
+				console.log(e)
+			},
+			async itemAcClick(e) {
+				if (e.text == '查看') {
+					console.log('信息', this.user)
+					this.fui.href("/pages/law/skeleton/skeleton?index=2&_id=" + this.user.id)
+				} else if (e.text == '取消收藏') {
+					await this.removeFromFavorites(this.user.id)
+					await this.refreshPage();
+				}
+				this.cancel()
+			},
+			cancel() {
+				this.showAc = false
+			},
+			// 获取收藏的用户列表
+			async getFavorites() {
+				try {
+					const result = await uni.getStorage({
+						key: "favorites"
+					});
+					this.records = result[1].data || [];
+					console.log('获取')
+					console.log(this.records)
+				} catch (error) {
+					console.error("获取收藏列表失败:", error);
+					return []; // 如果没有存储，返回空数组
+				}
+			},
+			// 从收藏中移除
+			async removeFromFavorites(userId) {
+				// 过滤掉要移除的用户
+				let favorites = this.records.filter(fav => fav.id !== userId);
+				// 保存更新后的收藏列表到 localStorage
+				uni.setStorage({
+					key: "favorites",
+					data: favorites
+				});
+				this.fui.toast("取消收藏成功");
+				await this.refreshPage()
+			},
+			async refreshPage() {
+				const currentPage = getCurrentPages().pop(); // 获取当前页面实例
+				const route = `/${currentPage.route}`; // 当前页面路径
+				const options = currentPage.options; // 页面参数
+
+				// 构造完整路径（带参数）
+				const queryString = Object.keys(options)
+					.map(key => `${key}=${options[key]}`)
+					.join('&');
+
+				const fullPath = queryString ? `${route}?${queryString}` : route;
+
+				// 跳转到当前页面，重新加载
+				uni.redirectTo({
+					url: fullPath
+				});
+			},
 			onClick(e) {
 				console.log(e)
-				this.fui.toast('取消收藏成功!')
+				if (e.item.text == '取消收藏') {
+					this.fui.toast('取消收藏成功!')
+				} else {
+
+				}
 			},
-			onTap() {
+			onTap(e) {
+				console.log(e)
 				//列表点击事件，此处也可关闭菜单
 				this.fui.toast('滑动可以取消收藏～')
 			},
@@ -111,5 +181,11 @@
 		width: 96rpx;
 		height: 96rpx;
 		display: block;
+	}
+
+	.fui-list__icon {
+		width: 48rpx;
+		height: 48rpx;
+		margin-right: 24rpx;
 	}
 </style>

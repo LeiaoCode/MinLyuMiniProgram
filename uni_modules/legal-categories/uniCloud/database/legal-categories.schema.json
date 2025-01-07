@@ -1,0 +1,35 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"name": {
+			"bsonType": "string",
+			"title": "类别名称",
+			"maxLength": 20,
+			"description": "类别名称，如 '婚姻家事', '交通事故'",
+			"minLength": 1
+		},
+		"img": {
+			"bsonType": "file",
+			"fileMediaType": "image",
+			"title": "图片文件",
+			"description": "图片文件信息，包括文件名、url等"
+		},
+		"description": {
+			"bsonType": "string",
+			"title": "类别描述",
+			"description": "类别的简短描述，可选",
+			"default": ""
+		}
+	}
+}

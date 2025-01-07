@@ -1,36 +1,48 @@
 <template>
 	<view class="fui-wrap">
 		<view class="fui-page__bd">
-			<view class="fui-sk__wrap fui-round">骨架节点</view>
+			<fui-avatar class="fui-avatar__wrap" size="large" :src="records.personal_photo.path"></fui-avatar>
+			<fui-divider dividerColor="#FFB703" color="#FFB703" :text="records.lawyer_name"></fui-divider>
 		</view>
 		<view class="fui-page__bd fui-page__spacing">
 			<view class="fui-section__title">擅长类型</view>
 			<view class="fui-align__center">
-				<fui-tag text="标签一" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签二" type="danger" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签三" type="success" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签四" type="warning" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签四" type="warning" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签四" type="warning" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签四" type="warning" margin-bottom="24" margin-right="24"></fui-tag>
-				<fui-tag text="标签五" type="purple" margin-bottom="24"></fui-tag>
+				<fui-tag v-for="(specialty, index) in records.specialty" :key="index" :text="specialty"
+					type="success" margin-bottom="24" margin-right="24">
+				</fui-tag>
 			</view>
 			<view class="fui-section__title">律师简介</view>
-			<fui-alert type="warn" isLeft spacing title="An info alert" size="28rpx" :marginTop="24">
+			<fui-alert type="warn" isLeft spacing :title="records.lawyer_intro" size="28rpx" :marginTop="24">
 				<fui-icon name="evaluate" :size="48" color="#fff"></fui-icon>
 			</fui-alert>
 			<view class="fui-section__title">律师位置</view>
-			<fui-alert type="warn" isLeft spacing title="An info alert" size="28rpx" :marginTop="24">
+			<fui-alert type="warn" isLeft spacing :title="records.practice_region" size="28rpx" :marginTop="24">
 				<fui-icon name="location-fill" :size="48" color="#fff"></fui-icon>
 			</fui-alert>
-			<fui-divider backgroundColor="#fff" dividerColor="#F1F4FA" color="#465CFF" text="联系方式" :size="28"></fui-divider>
+			<fui-divider backgroundColor="#fff" dividerColor="#F1F4FA" color="#465CFF" text="联系方式"
+				:size="28"></fui-divider>
 			<view class="fui-page__bd">
 				<view class="fui-contacts__box">
-					<view class="fui-contacts__item" v-for="(item,index) in contacts" :key="index"
-						@tap="copy($event,item.value,item.text)">
-						<image class="fui-icon" :src="`/static/images/cooperate/light/icon_${item.icon}_3x.png`"></image>
-						<view class="fui-title">{{item.text}}</view>
+					<view class="fui-contacts__item" @tap="copy($event, records.douyin_account, '抖音')">
+						<image class="fui-icon" src="/static/images/cooperate/light/icon_douyin_3x.png"></image>
+						<view class="fui-title">抖音</view>
 					</view>
+
+					<view class="fui-contacts__item" @tap="copy($event, records.contact_phone, '微信')">
+						<image class="fui-icon" src="/static/images/cooperate/light/icon_weixin_3x.png"></image>
+						<view class="fui-title">微信</view>
+					</view>
+
+					<view class="fui-contacts__item" @tap="copy($event, records.contact_phone, 'QQ')">
+						<image class="fui-icon" src="/static/images/cooperate/light/icon_qq_3x.png"></image>
+						<view class="fui-title">QQ</view>
+					</view>
+
+					<view class="fui-contacts__item" @tap="copy($event, records.email, '邮箱')">
+						<image class="fui-icon" src="/static/images/cooperate/light/icon_email_3x.png"></image>
+						<view class="fui-title">邮箱</view>
+					</view>
+
 				</view>
 			</view>
 		</view>
@@ -44,11 +56,13 @@
 		data() {
 			return {
 				show: true,
-				contacts: [ {
+				records: {},
+				legalSpecialtyMap: {},
+				contacts: [{
 					icon: 'douyin',
 					text: '抖音',
 					value: '1223213'
-				},{
+				}, {
 					icon: 'weixin',
 					text: '微信',
 					value: 'wx_firstui'
@@ -56,11 +70,12 @@
 					icon: 'qq',
 					text: 'QQ',
 					value: '3560662983'
-				},{
+				}, {
 					icon: 'email',
 					text: '邮箱',
 					value: 'firstui@126.com'
-				}]
+				}],
+				objId: ''
 			}
 		},
 		onReady() {
@@ -68,8 +83,59 @@
 				this.show = false
 			}, 2000)
 		},
+		created() {
+			// 页面加载时动态获取映射关系
+			this.fetchLegalSpecialtyMap();
+			this.getLawyers(this.objId)
+		},
+		onLoad(e) {
+			this.objId = String(e._id) || 0;
+		},
 		methods: {
+			async fetchLegalSpecialtyMap() {
+				try {
+					const db = uniCloud.database();
+					const res = await db.collection("legal-categories").get();
+					// 构建映射关系
+					this.legalSpecialtyMap = res.result.data.reduce((map, item) => {
+						map[item._id] = item.name;
+						return map;
+					}, {});
+					console.log('legalSpecialtyMap', this.legalSpecialtyMap)
+				} catch (err) {
+					console.error("Error fetching legal specialties:", err);
+				}
+			},
+			// 翻译方法
+			translateLegalSpecialty(values) {
+				if (!Array.isArray(values)) {
+					console.error("Expected an array, but got:", values);
+					return ["未知专长"]; // 返回一个数组，默认值为包含“未知专长”的数组
+				}
+
+				return values.map(value => this.legalSpecialtyMap[value] || "未知专长");
+			},
+			async getLawyers(id) {
+				try {
+					const res = await uniCloud.database().collection('lawyers').where({
+						_id: id
+					}).get();
+					let arr = res.result.data
+					console.log('结果：', arr)
+					if (arr.length) {
+						this.records = arr[0]; // 提取 data 部分
+						console.log('查询结果1:', this.records);
+						this.records.specialty = this.translateLegalSpecialty(this.records.legal_specialty)
+						console.log('查询结果2:', this.records.specialty);
+					} else {
+						console.error('查询失败，没有结果:', res);
+					}
+				} catch (error) {
+					console.error('查询 lawyers 数据库失败:', error);
+				}
+			},
 			copy(e, content, title) {
+				console.log('内容：' + content)
 				title = title || '链接'
 				$fui.getClipboardData(content, res => {
 					this.fui.toast(`${title}复制成功`);
@@ -80,6 +146,20 @@
 </script>
 
 <style>
+	.fui-avatar__size-large {
+		width: 167px !important;
+		height: 167px !important;
+	}
+
+	.fui-avatar__wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 40rpx auto;
+		width: 200rpx;
+		height: 200rpx;
+	}
+
 	.fui-sk__wrap {
 		background: #16AB60;
 		color: #fff;
@@ -106,20 +186,20 @@
 		align-items: center;
 		padding: 6rpx 0 4rpx 24rpx;
 	}
-	
+
 	/* 联系方式 */
-	
+
 	.fui-page__bd {
 		background-color: #fff;
 	}
-	
+
 	.fui-menu__icon {
 		width: 96rpx;
 		height: 96rpx;
 		display: block;
 		margin-bottom: 16rpx;
 	}
-	
+
 	.fui-contacts__box {
 		width: 100%;
 		padding: 32rpx 32rpx 20rpx;
@@ -127,7 +207,7 @@
 		display: flex;
 		align-items: center;
 	}
-	
+
 	.fui-contacts__item {
 		display: flex;
 		align-items: center;
@@ -138,18 +218,18 @@
 		cursor: pointer;
 		/* #endif */
 	}
-	
+
 	.fui-icon {
 		width: 96rpx;
 		height: 96rpx;
 	}
-	
+
 	.fui-title {
 		font-size: 28rpx;
 		color: #333333;
 		padding-top: 16rpx;
 	}
-	
+
 	.fui-desc {
 		font-size: 24rpx;
 		font-weight: 400;

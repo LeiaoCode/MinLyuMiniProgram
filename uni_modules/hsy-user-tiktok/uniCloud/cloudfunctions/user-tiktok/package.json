@@ -1,0 +1,14 @@
+{
+  "name": "user-tiktok",
+  "dependencies": {
+    "uni-config-center": "file:../../../../uni-config-center/uniCloud/cloudfunctions/common/uni-config-center",
+    "uni-id-common": "file:../../../../uni-id-common/uniCloud/cloudfunctions/common/uni-id-common"
+  },
+  "extensions": {
+    "uni-cloud-jql": {}
+  },
+  "origin-plugin-dev-name": "hsy-user-tiktok",
+  "origin-plugin-version": "1.0.2",
+  "plugin-dev-name": "hsy-user-tiktok",
+  "plugin-version": "1.0.2"
+}
