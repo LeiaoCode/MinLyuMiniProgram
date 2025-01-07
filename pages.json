@@ -117,6 +117,22 @@
         }
       }
     },
+    {
+      "path": "pages/law/result-eg/result-eg",
+      "style": {
+        // #ifdef H5
+        "titleNView": false,
+        // #endif
+        "navigationBarTitleText": "提交结果",
+        "enablePullDownRefresh": false,
+        // #ifndef MP-ALIPAY
+        "navigationBarBackgroundColor": "#F1F4FA",
+        // #endif
+        "mp-alipay": {
+          "allowsBounceVertical": "YES"
+        }
+      }
+    },
     // 自定义页面 end
     {
       "path": "pages/my/vip/vip",
