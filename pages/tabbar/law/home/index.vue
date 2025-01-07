@@ -29,12 +29,13 @@
 			</view>
 			<!-- 咨询类型 -->
 			<view class="fui-section__title">咨询类型</view>
-			<view >
+			<view style="display: none;">
 				<fui-card>
 					<fui-grid :square="false" :columns="5">
 						<fui-grid-item v-for="(item,index) in nums" :key="index">
 							<view class="fui-grid__cell fui-padding">
-								<image src="/static/images/common/icon_tabbar_2x.png" class="fui-icon__2x" mode="widthFix">
+								<image src="/static/images/common/icon_tabbar_2x.png" class="fui-icon__2x"
+									mode="widthFix">
 								</image>
 								<text>Grid</text>
 							</view>
@@ -42,6 +43,27 @@
 					</fui-grid>
 				</fui-card>
 			</view>
+			
+			<view class="fui-card__wrap">
+				<fui-card>
+					<view>
+						<fui-horizontal-scroll>
+							<view>
+								<view class="fui-list" :class="{'fui-mtop':index!==0}" v-for="(list,index) in menuList"
+									:key="index">
+									<view class="fui-list--item fui-mr--52" v-for="(item,idx) in list" :key="item.text">
+										<fui-lazyload background="transparent" marginBottom="12" :width="96"
+											:height="96" :src="item.icon" mode="aspectFill">
+										</fui-lazyload>
+										<fui-text un-shrink :text="item.text" color="#888" size="24"></fui-text>
+									</view>
+								</view>
+							</view>
+						</fui-horizontal-scroll>
+					</view>
+				</fui-card>
+			</view>
+			
 			<!-- 推荐律师 -->
 			<view class="fui-section__title">推荐律师</view>
 			<view>
@@ -56,7 +78,8 @@
 						</fui-list-cell>
 						<scroll-view :scroll-x="true" :show-scrollbar="false" class="fui-scroll__view">
 							<view class="fui-cell__list">
-								<view class="fui-list__item" v-for="(item,index) in records" :key="index" @click="jump(item)">
+								<view class="fui-list__item" v-for="(item,index) in records" :key="index"
+									@click="jump(item)">
 									<fui-avatar :src="item.avatar" marginBottom="20"></fui-avatar>
 									<fui-overflow-hidden :text="item.name" align="center" :size="26" width="128rpx">
 									</fui-overflow-hidden>
@@ -66,10 +89,13 @@
 					</view>
 				</fui-card>
 			</view>
-			
+
+
+
 			<!-- 推荐案例 -->
 			<view class="fui-section__title">推荐案例</view>
-			<fui-card :src="src2" imageRadius="50%" title="推荐案例" color="#465CFF" tag="23小时前" :headerLine="false" showBorder>
+			<fui-card :src="src2" imageRadius="50%" title="推荐案例" color="#465CFF" tag="23小时前" :headerLine="false"
+				showBorder>
 				<view class="fui-list__item-card" @click="hrefTabs">
 					<image class="fui-cover" :src="`${resUrl}/cooperate/light/img_banner_3x.png`" mode="widthFix">
 					</image>
@@ -98,58 +124,109 @@
 					activeBackground: '#FFB703',
 					activeWidth: 30
 				},
-				resUrl:this.fui.resUrl(),
+				resUrl: this.fui.resUrl(),
 				nums: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 				arrs: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-				templateData:[
-					{
-						cn: '免费咨询',
-						en: 'Consulting',
-						src: 'login',
-						background: '#FFF7E5',
-						page: '/pages/nav/login-nav/login-nav'
+				templateData: [{
+					cn: '免费咨询',
+					en: 'Consulting',
+					src: 'login',
+					background: '#FFF7E5',
+					page: '/pages/nav/login-nav/login-nav'
+				}, {
+					cn: '找律师',
+					en: 'Find a lawyer',
+					src: 'education',
+					background: '#FFF4F4',
+					page: ''
+				}, ],
+				records: [{
+					avatar: '/static/images/common/logo.png',
+					name: '独留清风醉'
+				}, {
+					avatar: '/static/images/common/img_logo.png',
+					name: '醉酒鞭名马'
+				}, {
+					avatar: '/static/images/help/light/icon_assembly_3x.png',
+					name: '久居孤海'
+				}, {
+					avatar: '/static/images/common/logo.png',
+					name: '张大大'
+				}, {
+					avatar: '/static/images/common/img_logo.png',
+					name: '李思思'
+				}, {
+					avatar: '/static/images/help/light/icon_bug_3x.png',
+					name: '邹小小'
+				}, {
+					avatar: '/static/images/common/logo.png',
+					name: '独留清风醉'
+				}, {
+					avatar: '/static/images/common/img_logo.png',
+					name: '醉酒鞭名马'
+				}, {
+					avatar: '/static/images/help/light/icon_member_relevant_3x.png',
+					name: '久居孤海'
+				}],
+				menuList: [
+					[{
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '百亿补贴'
 					}, {
-						cn: '找律师',
-						en: 'Find a lawyer',
-						src: 'education',
-						background: '#FFF4F4',
-						page: ''
-					},
-				],
-				records:[{
-							avatar: '/static/images/common/logo.png',
-							name: '独留清风醉'
-						}, {
-							avatar: '/static/images/common/img_logo.png',
-							name: '醉酒鞭名马'
-						}, {
-							avatar: '/static/images/help/light/icon_assembly_3x.png',
-							name: '久居孤海'
-						}, {
-							avatar: '/static/images/common/logo.png',
-							name: '张大大'
-						}, {
-							avatar: '/static/images/common/img_logo.png',
-							name: '李思思'
-						}, {
-							avatar: '/static/images/help/light/icon_bug_3x.png',
-							name: '邹小小'
-						}, {
-							avatar: '/static/images/common/logo.png',
-							name: '独留清风醉'
-						}, {
-							avatar: '/static/images/common/img_logo.png',
-							name: '醉酒鞭名马'
-						}, {
-							avatar: '/static/images/help/light/icon_member_relevant_3x.png',
-							name: '久居孤海'
-						}]
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '查快递'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '实时低价'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '摇现金'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '家电清洗'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '活动日历'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '资质规则'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '限时秒杀'
+					}],
+					[{
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '签到'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '医药馆'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '断码清仓'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '爱回收'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '买车养车'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '家用电器'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '免费水果'
+					}, {
+						icon: '/static/images/common/icon_tabbar_2x.png',
+						text: '充值中心'
+					}]
+				]
+
 			}
 		},
 		methods: {
-			jump(e){
+			jump(e) {
 				console.log(e)
-				this.fui.href("/pages/law/skeleton/skeleton?index=2&title="+e.name)
+				this.fui.href("/pages/law/skeleton/skeleton?index=2&title=" + e.name)
 			},
 			hrefTabs() {
 				let url = '/pages/law/vtabs/vtabs';
@@ -165,8 +242,11 @@
 			},
 			href(e) {
 				console.log(e)
-				if(e.cn=='找律师'){
+				if (e.cn == '找律师') {
 					const url = "/pages/law/indexList/indexList-A"
+					uni.fui.href(url)
+				} else if (e.cn == '免费咨询') {
+					const url = "/pages/law/panel/panel"
 					uni.fui.href(url)
 				}
 			},
@@ -181,6 +261,33 @@
 </script>
 
 <style>
+	/* 推荐律师 */
+	.fui-list {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.fui-list--item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		margin-right: 24rpx;
+	}
+
+	.fui-mr--52 {
+		margin-right: 52rpx;
+	}
+
+	.fui-list--item:last-child {
+		margin-right: 0;
+	}
+
+	.fui-mtop {
+		margin-top: 24rpx;
+	}
+
 	/* 推荐案例 */
 	.fui-list__item-card {
 		width: 100%;
@@ -188,11 +295,13 @@
 		position: relative;
 		background: #eee;
 	}
+
 	.fui-cover {
 		width: 100%;
 		height: 385rpx;
 		display: block;
 	}
+
 	.fui-list__title {
 		position: absolute;
 		left: 0;
@@ -203,13 +312,14 @@
 		box-sizing: border-box;
 		background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
 	}
+
 	/* 推荐律师 */
 	.fui-card__wrap {
 		border-radius: 16rpx;
 		overflow: hidden;
 		background-color: #fff;
 	}
-	
+
 	.fui-card__header {
 		flex: 1;
 		/* #ifndef APP-NVUE */
@@ -219,20 +329,20 @@
 		flex-direction: row;
 		justify-content: space-between;
 	}
-	
+
 	.fui-scroll__view {
 		flex-direction: row;
 		overflow: hidden;
 	}
-	
-	
+
+
 	.fui-cell__list {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
 		flex-direction: row;
 	}
-	
+
 	.fui-list__item {
 		width: 160rpx;
 		/* #ifndef APP-NVUE */
@@ -243,21 +353,24 @@
 		align-items: center;
 		padding: 0 16rpx 24rpx;
 	}
+
 	/* 每个分栏的标题 */
 	.fui-layout__item {
 		margin-bottom: 32rpx;
 		box-sizing: border-box;
 	}
+
 	/* 分类 */
 	.fui-page-bd {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
 	.fui-section__title {
 		margin-left: 32rpx;
 		margin-top: 34rpx;
 	}
-	
+
 	.fui-grid__cell {
 		display: flex;
 		align-items: center;
@@ -267,46 +380,47 @@
 		font-size: 28rpx;
 		font-weight: 400;
 	}
-	
+
 	.fui-padding {
 		padding: 36rpx 0;
 	}
-	
+
 	.fui-icon {
 		width: 96rpx;
 		height: 96rpx;
 		margin-bottom: 16rpx;
 	}
-	
+
 	.fui-icon__2x {
 		width: 64rpx;
 		height: 64rpx;
 		margin-bottom: 16rpx;
 	}
-	
+
 	.fui-flex__column {
 		flex: 1;
 	}
+
 	/* 咨询 */
 	.fui-page-bd {
 		display: flex;
 		flex-wrap: wrap;
 	}
-	
+
 	.fui-template__item {
 		width: 50%;
 		margin-bottom: 32rpx;
 		box-sizing: border-box;
 	}
-	
+
 	.fui-template__item:nth-of-type(odd) {
 		padding-right: 15rpx;
 	}
-	
+
 	.fui-template__item:nth-of-type(even) {
 		padding-left: 15rpx;
 	}
-	
+
 	.fui-template__item-inner {
 		height: 176rpx;
 		border-radius: 24rpx;
@@ -318,6 +432,7 @@
 		cursor: pointer;
 		/* #endif */
 	}
+
 	.fui-icon {
 		width: 64rpx;
 		height: 64rpx;
@@ -325,17 +440,19 @@
 		right: 32rpx;
 		top: 32rpx;
 	}
+
 	.fui-name__cn {
 		line-height: 32rpx;
 		padding-top: 62rpx;
 	}
-	
+
 	.fui-name__en {
 		font-size: 24rpx;
 		line-height: 24rpx;
 		color: #B2B2B2;
 		padding-top: 16rpx;
 	}
+
 	/* #ifndef APP-NVUE */
 	page {
 		font-weight: normal;
@@ -399,7 +516,7 @@
 		/* #endif */
 		transition-timing-function: linear;
 		transition-duration: .1s;
-		transition-property:transform ;
+		transition-property: transform;
 		height: 320rpx;
 		background: #f8f8f8;
 		align-items: center;
@@ -425,5 +542,4 @@
 	/* #endif */
 
 	/* 布局内容样式 end */
-	
 </style>

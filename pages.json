@@ -101,6 +101,22 @@
         }
       }
     },
+    {
+      "path": "pages/law/panel/panel",
+      "style": {
+        // #ifdef H5
+        "titleNView": false,
+        // #endif
+        "navigationBarTitleText": "快速咨询",
+        "enablePullDownRefresh": false,
+        // #ifndef MP-ALIPAY
+        "navigationBarBackgroundColor": "#F1F4FA",
+        // #endif
+        "mp-alipay": {
+          "allowsBounceVertical": "YES"
+        }
+      }
+    },
     // 自定义页面 end
     {
       "path": "pages/my/vip/vip",
