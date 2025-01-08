@@ -23,7 +23,7 @@
 		<!-- 法律类型 -->
 		<view class="fui-section__title">法律类型</view>
 		<fui-wing-blank>
-			<fui-data-tag :options="options" v-model="val2" width="150" activeColor="#FFB703" borderColor="#FFB703" mark
+			<fui-data-tag :options="options" v-model="val2" width="200" activeColor="#FFB703" borderColor="#FFB703" mark
 				markColor="#FFB703"></fui-data-tag>
 		</fui-wing-blank>
 		<!-- 输入框 -->
@@ -35,10 +35,11 @@
 
 		<!-- 上传图片 -->
 		<view class="fui-section__title">上传图片</view>
-		<fui-upload :max="5" immediate :url="url" ref="upload" @success="success" @error="error" @complete="complete"
-			@preview="preview">
-		</fui-upload>
-
+		<view class="fui-page__bd fui-page__spacing">
+			<fui-upload :max="5" immediate :url="url" ref="upload" @success="success" @error="error"
+				@complete="complete" @preview="preview">
+			</fui-upload>
+		</view>
 
 		<!-- 联系方式 -->
 		<view class="fui-section__title">请留下您的电话或微信（联系方式不会另作他用，请您放心留下，便于律师联系您）</view>
@@ -46,6 +47,13 @@
 			<template v-slot:left>
 				<view class="fui-left__icon">
 					<fui-icon name="mobile" color="#333" :size="48"></fui-icon>
+				</view>
+			</template>
+		</fui-input>
+		<fui-input placeholder="请输入姓名">
+			<template v-slot:left>
+				<view class="fui-left__icon">
+					<fui-icon name="my-fill" color="#333" :size="48"></fui-icon>
 				</view>
 			</template>
 		</fui-input>
@@ -62,6 +70,7 @@
 </template>
 
 <script>
+	import fuiUpload from "@/components/firstui/fui-upload/fui-upload.vue"
 	export default {
 		data() {
 			return {
@@ -70,61 +79,72 @@
 					title: '基础使用',
 					desc: 'First UI组件库，是基于uni-app开发的一款轻量、全面可靠的跨平台移动端组件库。'
 				},
-				panelData2: {
-					head: '快速咨询',
-					src: '/static/images/common/logo.png',
-					title: '律师姓名',
-					desc: '律师介绍'
-				},
-				panelData3: {
-					head: 'First UI介绍',
-					list: [{
-						src: '/static/images/common/logo.png',
-						title: 'First UI组件库',
-						desc: 'First UI 是一套基于uni-app开发的组件化、可复用、易扩展、低耦合的跨平台移动端UI 组件库。'
-					}, {
-						src: '/static/images/common/logo.png',
-						title: 'First UI跨平台UI组件库',
-						desc: 'First UI组件库，是基于uni-app开发的一款轻量、全面可靠的跨平台移动端组件库。'
-					}]
-				},
-				panelData4: {
-					head: '设置图片大小',
-					list: [{
-						src: '/static/images/common/img_logo.png',
-						title: 'First UI组件库'
-					}, {
-						src: '/static/images/common/img_logo.png',
-						title: 'First UI跨平台UI组件库'
-					}]
-				},
-				panelData5: {
-					head: '附加信息',
-					list: [{
-						title: 'First UI组件库',
-						desc: 'First UI组件库，是基于uni-app开发的一款轻量、全面可靠的跨平台移动端组件库。',
-						source: '开源中国',
-						time: '2021-08-09'
-					}, {
-						title: 'First UI跨平台UI组件库',
-						desc: 'First UI组件库，是基于uni-app开发的一款轻量、全面可靠的跨平台移动端组件库。',
-						source: 'GitHub',
-						time: '2021-08-09',
-						extra: 'Apache License 2.0'
-					}]
-				},
+				panelData2:'',
 				dynamicContent: '',
 				currentNumber: 68, // 初始数字
 				options: ['选项一', '选项二', '选项三', '选项四'],
 				val2: '选项三',
-				url: 'https://ffa.firstui.cn/api/example/upload-file',
+				url: 'https://tt00c7767a9fcdf31001-env-p9tj8ovcem.tos-cn-beijing.volces.com',
+				//上传状态，用于保存或其他操作时做判断
+				status: '',
+				//上传的图片地址列表
+				urls: [],
+				records: []
 			}
+		},
+		components: {
+			fuiUpload
 		},
 		created() {
 			this.updateContent();
+			this.getLegalCategories();
+			this.getLawyers();
 			setInterval(this.updateContent, this.getRandomTime());
 		},
 		methods: {
+			async getLawyers() {
+				try {
+					const res = await uniCloud.database().collection('lawyers').where({
+						is_featured: true
+					}).get();
+					let arr = res.result.data
+					if (arr.length) {
+						// 随机选择一条数据
+						const randomIndex = Math.floor(Math.random() * arr.length);
+						const randomLawyer = arr[randomIndex];
+						console.log(randomLawyer)
+						// 构造 panelData2 数据
+						this.panelData2 = {
+							head: '快速咨询',
+							src: randomLawyer.personal_photo.path ||
+								'/static/images/common/logo.png', // 如果没有图片则使用默认图片
+							title: randomLawyer.name || '律师姓名', // 律师姓名
+							desc: randomLawyer.lawyer_intro || '律师介绍' // 律师介绍
+						};
+					} else {
+						console.error('查询失败，没有结果:', res);
+					}
+				} catch (error) {
+					console.error('查询 lawyers 数据库失败:', error);
+				}
+			},
+			async getLegalCategories() {
+				try {
+					// 查询 legal-categories 数据库
+					const res = await uniCloud.database().collection('legal-categories').get();
+					let arr = res.result.data
+					if (arr.length > 0) {
+						// 将数据分成两个数组
+						console.log(arr)
+						this.options = arr.map(item => item.name);;
+						this.val2 = this.options[0]
+					} else {
+						console.log('未查询到任何数据');
+					}
+				} catch (error) {
+					console.error('查询 legal-categories 失败:', error);
+				}
+			},
 			updateContent() {
 				const min = Math.max(this.currentNumber - 7, 1); // 限制最小值为 1
 				const max = Math.min(this.currentNumber + 7, 100); // 限制最大值为 100
@@ -135,8 +155,10 @@
 				return Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000; // 随机时间1秒到5秒
 			},
 			href(type) {
+				// console.log(type)
+				// this.fui.href(`/pages/law/result-eg/result-eg?type=${type}`)
 				console.log(type)
-				this.fui.href(`/pages/law/result-eg/result-eg?type=${type}`)
+				this.fui.href(`/pages/law/upload/upload`)
 			},
 			itemClick(e) {
 				console.log(e)
@@ -157,9 +179,11 @@
 				}
 			},
 			error(e) {
+				console.log(e)
 				this.status = e.status
 			},
 			complete(e) {
+				console.log(e)
 				this.status = e.status
 				this.urls = e.urls
 				if (this.status === 'success' && e.action === 'upload') {

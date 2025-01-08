@@ -286,7 +286,8 @@
 				this.fui.href("/pages/law/skeleton/skeleton?index=2&_id=" + e._id)
 			},
 			hrefTabs() {
-				let url = '/pages/law/vtabs/vtabs';
+				// let url = '/pages/law/vtabs/vtabs';
+				let url = '/uni_modules/uni-cms-article/pages/detail/detail';
 				this.fui.href(url)
 			},
 			hrefIndex() {

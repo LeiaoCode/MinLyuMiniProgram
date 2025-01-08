@@ -133,6 +133,22 @@
         }
       }
     },
+    {
+      "path": "pages/law/upload/upload",
+      "style": {
+        // #ifdef H5
+        "titleNView": false,
+        // #endif
+        "navigationBarTitleText": "提交结果",
+        "enablePullDownRefresh": false,
+        // #ifndef MP-ALIPAY
+        "navigationBarBackgroundColor": "#F1F4FA",
+        // #endif
+        "mp-alipay": {
+          "allowsBounceVertical": "YES"
+        }
+      }
+    },
     // 自定义页面 end
     {
       "path": "pages/my/vip/vip",
@@ -352,7 +368,41 @@
         }
       }
     }
-  ],
+  ,{
+    "path": "uni_modules/uni-cms-article/pages/list/list",
+    "style": {
+        "backgroundColor": "#FFFFFF",
+        "disableScroll": true,
+        "navigationStyle": "custom"
+    }
+}
+,{
+    "path": "uni_modules/uni-cms-article/pages/search/search",
+    "style": {
+        "navigationBarTitleText": "搜索"
+    }
+}
+,{
+    "path": "uni_modules/uni-cms-article/pages/detail/detail",
+    "style": {
+        "backgroundColor": "#FFFFFF",
+        "navigationBarTitleText": ""
+    }
+}
+,{
+    "path": "uni_modules/uni-cms-article/pages/detail/preview",
+    "style": {
+        "backgroundColor": "#FFFFFF",
+        "navigationBarTitleText": ""
+    }
+}
+,{
+    "path": "uni_modules/uni-cms-article/pages/webview/webview",
+    "style": {
+        "navigationBarTitleText": ""
+    }
+}
+],
   "subPackages": [
     {
       "root": "pages/layout",
