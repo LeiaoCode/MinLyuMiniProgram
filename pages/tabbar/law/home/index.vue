@@ -33,7 +33,7 @@
 				<fui-card>
 					<fui-grid :square="false" :columns="5">
 						<fui-grid-item v-for="(item,index) in nums" :key="index">
-							<view class="fui-grid__cell fui-padding">
+							<view class="fui-grid__cell fui-padding" @click="handleNums(item)">
 								<image src="/static/images/common/icon_tabbar_2x.png" class="fui-icon__2x"
 									mode="widthFix">
 								</image>
@@ -51,7 +51,8 @@
 							<view>
 								<view class="fui-list" :class="{'fui-mtop':index!==0}" v-for="(list,index) in menuList"
 									:key="index">
-									<view class="fui-list--item fui-mr--52" v-for="(item,idx) in list" :key="item.name">
+									<view class="fui-list--item fui-mr--52" @click="handleNums(item)"
+										v-for="(item,idx) in list" :key="item.name">
 										<fui-lazyload background="transparent" marginBottom="12" :width="96"
 											:height="96" :src="item.img.path" mode="aspectFill">
 										</fui-lazyload>
@@ -81,7 +82,8 @@
 								<view class="fui-list__item" v-for="(item,index) in records" :key="index"
 									@click="jump(item)">
 									<fui-avatar :src="item.personal_photo.path" marginBottom="20"></fui-avatar>
-									<fui-overflow-hidden :text="item.lawyer_name" align="center" :size="26" width="128rpx">
+									<fui-overflow-hidden :text="item.lawyer_name" align="center" :size="26"
+										width="128rpx">
 									</fui-overflow-hidden>
 								</view>
 							</view>
@@ -94,7 +96,7 @@
 
 			<!-- 推荐案例 -->
 			<view class="fui-section__title">推荐案例</view>
-			<fui-card :src="src2" imageRadius="50%" title="推荐案例" color="#465CFF" tag="23小时前" :headerLine="false"
+			<fui-card imageRadius="50%" title="推荐案例" color="#465CFF" tag="23小时前" :headerLine="false"
 				showBorder>
 				<view class="fui-list__item-card" @click="hrefTabs">
 					<image class="fui-cover" :src="`${resUrl}/cooperate/light/img_banner_3x.png`" mode="widthFix">
@@ -229,6 +231,11 @@
 			this.getLawyers()
 		},
 		methods: {
+			handleNums(e) {
+				console.log(e)
+				const url = "/pages/law/panel/panel?name=" + e.name
+				uni.fui.href(url)
+			},
 			async getBanners() {
 				try {
 					const res = await uniCloud.database().collection('opendb-banner').get();
