@@ -95,7 +95,6 @@
 				}
 			},
 			hrefText(value) {
-				console.log(value, url)
 				let url = '/pages/law/richText/richText?_id=' + value.id;
 				this.fui.href(url)
 			},

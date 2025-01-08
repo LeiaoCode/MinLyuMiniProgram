@@ -235,7 +235,8 @@
 					const result = await uni.getStorage({
 						key: "favorites"
 					});
-					return result[1].data || []; // 返回存储的数据，或者空数组
+					console.log(result)
+					return result.data || []; // 返回存储的数据，或者空数组
 				} catch (error) {
 					console.error("获取收藏列表失败:", error);
 					return []; // 如果没有存储，返回空数组

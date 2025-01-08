@@ -82,7 +82,7 @@
 					const result = await uni.getStorage({
 						key: "favorites"
 					});
-					this.records = result[1].data || [];
+					this.records = result.data || [];
 					console.log('获取')
 					console.log(this.records)
 				} catch (error) {
