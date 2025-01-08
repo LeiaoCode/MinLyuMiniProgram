@@ -64,7 +64,7 @@
 					text: '法律案例',
 					background: '#FFF4F4',
 					src: 'cooperation',
-					page: '/pages/law/vtabs/vtabs'
+					page: '/pages/law/vtabs/vtabs-B'
 				}],
 				list: [{
 						text: '我的收藏',

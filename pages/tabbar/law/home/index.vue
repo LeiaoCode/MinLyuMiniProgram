@@ -287,7 +287,7 @@
 			},
 			hrefTabs() {
 				// let url = '/pages/law/vtabs/vtabs';
-				let url = '/uni_modules/uni-cms-article/pages/detail/detail';
+				let url = '/pages/law/vtabs/vtabs-B';
 				this.fui.href(url)
 			},
 			hrefIndex() {

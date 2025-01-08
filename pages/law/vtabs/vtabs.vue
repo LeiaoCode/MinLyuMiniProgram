@@ -8,7 +8,7 @@
 					<view class="fui-content--box" @click="hrefText(item)">
 						<text class="fui-title">{{item.title || item.name}}</text>
 						<image class="fui-img" :src="resUrl+item.img" mode="widthFix"></image>
-						<text class="fui-descr">{{item.descr}}</text>
+						<text class="fui-descr">{{formatTimestamp(item.descr)}}</text>
 					</view>
 				</view>
 			</fui-vtabs-content>
@@ -22,7 +22,9 @@
 			return {
 				vtabs: [],
 				activeTab: 0,
-				resUrl: this.fui.resUrl()
+				resUrl: '',
+				articles: '',
+				mapData: ''
 			}
 		},
 		onLoad() {
@@ -74,11 +76,102 @@
 					this.$refs.vtabs.reset()
 				}, 200)
 			})
+			// this.getLegalCategoriesNames()
+			// this.fetchArticles()
+			this.fetchArticlesWithCategories()
 		},
 		methods: {
+
+			async fetchArticlesWithCategories() {
+				try {
+					const db = uniCloud.database();
+
+					// 获取文章数据
+					const articlesRes = await db.collection('uni-cms-articles').get();
+					const articles = articlesRes.result.data;
+
+					// 获取分类映射
+					const categoriesRes = await db.collection('legal-categories').get();
+					const categories = categoriesRes.result.data;
+
+					// 创建分类映射表
+					const categoryMap = new Map(categories.map(item => [item._id, item.name]));
+
+					// 遍历文章数据，将 category_id 转换为对应的分类名称
+					const articlesWithCategoryNames = articles.map(article => ({
+						...article,
+						category_name: categoryMap.get(article.category_id) || '未知分类' // 如果找不到分类，设置默认值
+					}));
+
+					// 打印结果
+					console.log('转换后的文章数据:', articlesWithCategoryNames);
+
+					const tabs = articlesWithCategoryNames.map(item => ({
+						name: item.category_name,
+						title: item.title,
+						img: item.thumbnail[0], // 默认图片
+						descr: item.publish_date
+					}));
+					this.vtabs = tabs
+				} catch (error) {
+					console.error('查询失败:', error);
+				}
+			},
+			formatTimestamp(timestamp) {
+				// 创建日期对象
+				const date = new Date(timestamp);
+				console.log(date)
+				// 格式化日期
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要加1
+				const day = String(date.getDate()).padStart(2, '0');
+				const hours = String(date.getHours()).padStart(2, '0');
+				const minutes = String(date.getMinutes()).padStart(2, '0');
+				const seconds = String(date.getSeconds()).padStart(2, '0');
+				console.log(`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`)
+				// 拼接日期字符串
+				return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+			},
+			async getLegalCategoriesNames() {
+				try {
+					// 初始化云数据库
+					const db = uniCloud.database();
+					const collection = db.collection('legal-categories');
+
+					// 查询数据库
+					const res = await collection.get();
+					const arr = res.result.data;
+					if (arr.length > 0) {
+						this.mapData = new Map(
+							arr.map(item => [item.id, item.name]) // 使用 id 作为 key，name/title 作为 value
+						);
+						console.log(this.mapData);
+					} else {
+						console.log('未查询到数据');
+						return [];
+					}
+				} catch (error) {
+					console.error('查询失败:', error);
+					return [];
+				}
+			},
+			async fetchArticles() {
+				const db = uniCloud.database();
+				const collection = db.collection('uni-cms-articles');
+				const res = await collection.get();
+				const arr = res.result.data;
+				if (arr.length > 0) {
+					this.articles = arr;
+					console.log('文章')
+					console.log(this.articles)
+				} else {
+					this.articles = [];
+				}
+			},
+
 			hrefText(value) {
-				let url = '/pages/law/richText/richText?_id='+value.name;
-				console.log(value,url)
+				let url = '/pages/law/richText/richText?_id=' + value.name;
+				console.log(value, url)
 				this.fui.href(url)
 			},
 			onTabClick(e) {
