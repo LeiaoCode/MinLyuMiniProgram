@@ -6,6 +6,13 @@
 		</view>
 		<view class="fui-page__spacing">
 			<view class="fui-menu__wrap fui-align__center">
+				<view class="fui-menu__item" v-for="(item,index) in shares" :key="index" >
+					<button open-type="share" class="fui-btn__feedback" @tap="href(item.page,$event)"></button>
+					<view class="fui-menu__img fui-flex__center" :style="{background:item.background}">
+						<image :src="`${resUrl}/my/light/icon_${item.src}_3x.png`" mode="widthFix"></image>
+					</view>
+					<text>{{item.text}}</text>
+				</view>
 				<view class="fui-menu__item" v-for="(item,index) in menus" :key="index" @tap="href(item.page,$event)">
 					<button open-type="feedback" class="fui-btn__feedback" v-if="index===2"></button>
 					<view class="fui-menu__img fui-flex__center" :style="{background:item.background}">
@@ -37,12 +44,13 @@
 		data() {
 			return {
 				resUrl: this.fui.resUrl(),
-				menus: [{
+				shares:[{
 					text: '分享好友',
 					background: '#F2FCF6',
 					src: 'share',
 					page: 'share'
-				}, {
+				}],
+				menus: [ {
 					text: '律师入驻',
 					background: '#FFFBF2',
 					src: 'appreciate',
@@ -62,7 +70,7 @@
 						text: '我的收藏',
 						src: 'edition',
 						page: '/pages/law/updated/updated'
-					}, 
+					},
 					{
 						text: '关于我们',
 						src: 'aboutus',
@@ -109,7 +117,7 @@
 					});
 					// #endif
 				} else if (page === 'share') {
-
+					console.log('分享')
 				} else if (page === 'feedback') {
 					let text = '复制 Issue 链接地址';
 
@@ -129,7 +137,7 @@
 						}
 					}, false, '', text)
 					// #endif
-				}else if (page === 'feedback') {
+				} else if (page === 'feedback') {
 					let text = '复制 Issue 链接地址';
 
 					// #ifdef MP-TOUTIAO || MP-BAIDU

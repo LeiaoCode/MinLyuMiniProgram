@@ -18,7 +18,7 @@
 			<!-- 快速咨询 -->
 			<view class="fui-section__title">快速咨询</view>
 			<view class="fui-page-bd fui-page__spacing fui-layout__item">
-				<view class="fui-template__item" @tap="href(item.page)" v-for="(item,index) in templateData" :key="index">
+				<view class="fui-template__item" @tap="href(item)" v-for="(item,index) in templateData" :key="index">
 					<view class="fui-template__item-inner" :style="{background:item.background}">
 						<image class="fui-icon" :src="`${resUrl}/template/light/icon_${item.src}_3x.png`"
 							mode="widthFix"></image>
@@ -29,37 +29,42 @@
 			</view>
 			<!-- 咨询类型 -->
 			<view class="fui-section__title">咨询类型</view>
-			<view class="fui-page-bd fui-page__spacing fui-layout__item">
-				<fui-grid :square="false" :columns="5">
-					<fui-grid-item v-for="(item,index) in nums" :key="index">
-						<view class="fui-grid__cell fui-padding">
-							<image src="/static/images/common/icon_tabbar_2x.png" class="fui-icon__2x" mode="widthFix">
-							</image>
-							<text>Grid</text>
-						</view>
-					</fui-grid-item>
-				</fui-grid>
+			<view >
+				<fui-card>
+					<fui-grid :square="false" :columns="5">
+						<fui-grid-item v-for="(item,index) in nums" :key="index">
+							<view class="fui-grid__cell fui-padding">
+								<image src="/static/images/common/icon_tabbar_2x.png" class="fui-icon__2x" mode="widthFix">
+								</image>
+								<text>Grid</text>
+							</view>
+						</fui-grid-item>
+					</fui-grid>
+				</fui-card>
 			</view>
 			<!-- 推荐律师 -->
-			<view class="fui-page__bd">
-				<view class="fui-card__wrap">
-					<fui-list-cell background="transparent" arrow :bottomBorder="false" :highlight="false"
-						:padding="['24rpx','24rpx','48rpx']">
-						<view class="fui-card__header">
-							<fui-text text="推荐律师" :size="28" fontWeight="bold"></fui-text>
-							<fui-text text="查看全部" :size="26" type="gray" @click="hrefIndex"></fui-text>
-						</view>
-					</fui-list-cell>
-					<scroll-view :scroll-x="true" :show-scrollbar="false" class="fui-scroll__view">
-						<view class="fui-cell__list">
-							<view class="fui-list__item" v-for="(item,index) in records" :key="index">
-								<fui-avatar :src="item.avatar" marginBottom="20"></fui-avatar>
-								<fui-overflow-hidden :text="item.name" align="center" :size="26" width="128rpx">
-								</fui-overflow-hidden>
+			<view class="fui-section__title">推荐律师</view>
+			<view>
+				<fui-card>
+					<view class="fui-card__wrap">
+						<fui-list-cell background="transparent" arrow :bottomBorder="false" :highlight="false"
+							:padding="['24rpx','24rpx','48rpx']">
+							<view class="fui-card__header">
+								<fui-text text="推荐律师" :size="28" fontWeight="bold"></fui-text>
+								<fui-text text="查看全部" :size="26" type="gray" @click="hrefIndex"></fui-text>
 							</view>
-						</view>
-					</scroll-view>
-				</view>
+						</fui-list-cell>
+						<scroll-view :scroll-x="true" :show-scrollbar="false" class="fui-scroll__view">
+							<view class="fui-cell__list">
+								<view class="fui-list__item" v-for="(item,index) in records" :key="index" @click="jump(item)">
+									<fui-avatar :src="item.avatar" marginBottom="20"></fui-avatar>
+									<fui-overflow-hidden :text="item.name" align="center" :size="26" width="128rpx">
+									</fui-overflow-hidden>
+								</view>
+							</view>
+						</scroll-view>
+					</view>
+				</fui-card>
 			</view>
 			
 			<!-- 推荐案例 -->
@@ -142,6 +147,10 @@
 			}
 		},
 		methods: {
+			jump(e){
+				console.log(e)
+				this.fui.href("/pages/law/skeleton/skeleton?index=2&title="+e.name)
+			},
 			hrefTabs() {
 				let url = '/pages/law/vtabs/vtabs';
 				this.fui.href(url)
@@ -154,9 +163,12 @@
 				const url = "/pages/my/qa/qa?index=2&title=VIP专属内容"
 				uni.fui.href(url)
 			},
-			href() {
-				const url = "/pages/component/expand/swiperDot/swiperDot"
-				uni.fui.href(url)
+			href(e) {
+				console.log(e)
+				if(e.cn=='找律师'){
+					const url = "/pages/law/indexList/indexList-A"
+					uni.fui.href(url)
+				}
 			},
 			change(e) {
 				this.current = e.detail.current;
