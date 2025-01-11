@@ -14,6 +14,8 @@
 
 <script>
 	import lists from './index.list.js'
+	import area from '@/area/provinces.json'
+	import regionUtils from "@/utils/regionUtils";
 	export default {
 		data() {
 			return {
@@ -30,13 +32,12 @@
 				records: [],
 				recordsNum: 0,
 				legalSpecialtyMap: {},
-				name: ''
+				name: '',
+				objId: ''
 			}
 		},
-		onLoad() {
-			// setTimeout(() => {
-			// 	this.show = true;
-			// }, 500)
+		onLoad(e) {
+			this.objId = String(e._id) || 0;
 		},
 		created() {
 			// this.fetchLegalSpecialtyMap()
@@ -68,12 +69,37 @@
 				try {
 					// 构造查询条件
 					const collection = uniCloud.database().collection('lawyers');
-					let query = this.name ? collection.where({
-						lawyer_name: new RegExp(this.name, 'i')
-					}) : collection;
+					let query = collection;
 
+					// 如果提供了 lawyer_name，添加该条件
+					if (this.name) {
+						query = query.where({
+							lawyer_name: new RegExp(this.name, 'i')
+						});
+					}
+
+					console.log(222)
+					console.log(this.objId)
+					// 如果提供了 legal_specialty，添加该条件
+					// 如果提供了 legal_specialty（objId），添加该条件
+					if (this.objId&&this.objId!=='undefined') {
+						// 如果 objId 是单个值
+						if (Array.isArray(this.objId)) {
+							query = query.where({
+								legal_specialty: uniCloud.database().command.in(this
+									.objId) // 查找 legal_specialty 数组中包含 objId 数组任何一个值的记录
+							});
+						} else {
+							query = query.where({
+								legal_specialty: uniCloud.database().command.in([this
+									.objId]) // 查找 legal_specialty 数组包含 objId 的记录
+							});
+						}
+					}
+					console.log(query)
 					// 查询数据
 					const res = await query.get();
+					console.log(res)
 					let arr = res.result.data
 					if (arr.length) {
 						this.recordsNum = arr.length
@@ -84,19 +110,22 @@
 						const grouped = await this
 							.groupRecordsBySpecialty(); // 等待分组结果
 						this.records = Object.entries(grouped).map(([practice_region, data]) => ({
-							letter: practice_region.charAt(0),
-							descr: practice_region,
+							letter: this.getRegionDisplay(practice_region).charAt(0),
+							descr: this.getRegionDisplay(practice_region),
 							data
 						}));
 						console.log('分组结果1:', this.records);
 						await this.constructRecordsFromFavorites();
 						console.log('分组结果2:', this.records);
 					} else {
-						console.error('查询失败，没有结果:', res);
+						console.log('查询失败，没有结果:', res);
 					}
 				} catch (error) {
 					console.error('查询 lawyers 数据库失败:', error);
 				}
+			},
+			getRegionDisplay(regionCode) {
+				return regionUtils.getRegionDisplay(area, regionCode);
 			},
 			// 获取收藏用户列表并重新构造 records
 			async constructRecordsFromFavorites() {
@@ -232,14 +261,21 @@
 			// 获取收藏的用户列表
 			async getFavorites() {
 				try {
-					const result = await uni.getStorage({
-						key: "favorites"
+					const result = await new Promise((resolve, reject) => {
+						uni.getStorage({
+							key: "favorites",
+							success(e) {
+								resolve(e.data || []); // 返回存储的数据，或者空数组
+							},
+							fail() {
+								resolve([]); // 如果没有存储数据，返回空数组
+							}
+						});
 					});
-					console.log(result)
-					return result.data || []; // 返回存储的数据，或者空数组
+					return result;
 				} catch (error) {
 					console.error("获取收藏列表失败:", error);
-					return []; // 如果没有存储，返回空数组
+					return []; // 如果发生错误，返回空数组
 				}
 			},
 			cancel() {

@@ -79,15 +79,21 @@
 			// 获取收藏的用户列表
 			async getFavorites() {
 				try {
-					const result = await uni.getStorage({
-						key: "favorites"
+					const result = await new Promise((resolve, reject) => {
+						uni.getStorage({
+							key: "favorites",
+							success(e) {
+								resolve(e.data || []); // 返回存储的数据，或者空数组
+							},
+							fail() {
+								resolve([]); // 如果没有存储数据，返回空数组
+							}
+						});
 					});
-					this.records = result.data || [];
-					console.log('获取')
-					console.log(this.records)
+					this.records = result;
 				} catch (error) {
 					console.error("获取收藏列表失败:", error);
-					return []; // 如果没有存储，返回空数组
+					this.records = []; // 如果发生错误，返回空数组
 				}
 			},
 			// 从收藏中移除

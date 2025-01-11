@@ -23,7 +23,7 @@
 			<fui-text text="张三" text-type="name" format block></fui-text>
 			<fui-text text="王小仙" text-type="name" format block></fui-text>
 			<view class="fui-section__title">数据脱敏-手机号</view>
-			<fui-text text="13544339908" call text-type="mobile" format></fui-text>
+			<fui-text call="true" text="13544339908" call text-type="mobile" format></fui-text>
 			<view class="fui-section__title">金额格式化</view>
 			<fui-text text="20000" text-type="amount" format>￥</fui-text>
 			<view class="fui-section__title">点击效果</view>

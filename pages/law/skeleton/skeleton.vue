@@ -7,8 +7,8 @@
 		<view class="fui-page__bd fui-page__spacing">
 			<view class="fui-section__title">擅长类型</view>
 			<view class="fui-align__center">
-				<fui-tag v-for="(specialty, index) in records.specialty" :key="index" :text="specialty"
-					type="success" margin-bottom="24" margin-right="24">
+				<fui-tag v-for="(specialty, index) in records.specialty" :key="index" :text="specialty" type="success"
+					margin-bottom="24" margin-right="24">
 				</fui-tag>
 			</view>
 			<view class="fui-section__title">律师简介</view>
@@ -16,16 +16,21 @@
 				<fui-icon name="evaluate" :size="48" color="#fff"></fui-icon>
 			</fui-alert>
 			<view class="fui-section__title">律师位置</view>
-			<fui-alert type="warn" isLeft spacing :title="records.practice_region" size="28rpx" :marginTop="24">
+			<fui-alert type="warn" isLeft spacing :title="getRegionDisplay(records.practice_region)" size="28rpx" :marginTop="24">
 				<fui-icon name="location-fill" :size="48" color="#fff"></fui-icon>
 			</fui-alert>
 			<fui-divider backgroundColor="#fff" dividerColor="#F1F4FA" color="#465CFF" text="联系方式"
 				:size="28"></fui-divider>
 			<view class="fui-page__bd">
 				<view class="fui-contacts__box">
+					<view class="fui-contacts__item" @tap="callPhone(records.contact_phone)">
+						<image class="fui-icon" src="/static/images/cooperate/light/phon_code_3x.png"></image>
+						<view class="fui-title">电话</view>
+					</view>
+
 					<view class="fui-contacts__item" @tap="copy($event, records.douyin_account, '抖音')">
 						<image class="fui-icon" src="/static/images/cooperate/light/icon_douyin_3x.png"></image>
-						<view class="fui-title">抖音</view>
+						<view class="fui-title">抖音号</view>
 					</view>
 
 					<view class="fui-contacts__item" @tap="copy($event, records.contact_phone, '微信')">
@@ -33,16 +38,10 @@
 						<view class="fui-title">微信</view>
 					</view>
 
-					<view class="fui-contacts__item" @tap="copy($event, records.contact_phone, 'QQ')">
-						<image class="fui-icon" src="/static/images/cooperate/light/icon_qq_3x.png"></image>
-						<view class="fui-title">QQ</view>
-					</view>
-
-					<view class="fui-contacts__item" @tap="copy($event, records.email, '邮箱')">
+					<view class="fui-contacts__item" @tap="sendMsg(records.contact_phone)">
 						<image class="fui-icon" src="/static/images/cooperate/light/icon_email_3x.png"></image>
-						<view class="fui-title">邮箱</view>
+						<view class="fui-title">短信</view>
 					</view>
-
 				</view>
 			</view>
 		</view>
@@ -52,6 +51,8 @@
 
 <script>
 	import $fui from '@/components/firstui/fui-clipboard';
+	import area from '@/area/provinces.json'
+	import regionUtils from "@/utils/regionUtils";
 	export default {
 		data() {
 			return {
@@ -92,6 +93,9 @@
 			this.objId = String(e._id) || 0;
 		},
 		methods: {
+			getRegionDisplay(regionCode) {
+				return regionUtils.getRegionDisplay(area, regionCode);
+			},
 			async fetchLegalSpecialtyMap() {
 				try {
 					const db = uniCloud.database();
@@ -128,11 +132,23 @@
 						this.records.specialty = this.translateLegalSpecialty(this.records.legal_specialty)
 						console.log('查询结果2:', this.records.specialty);
 					} else {
+						this.records = [];
 						console.error('查询失败，没有结果:', res);
 					}
 				} catch (error) {
 					console.error('查询 lawyers 数据库失败:', error);
 				}
+			},
+			callPhone(text) {
+				uni.makePhoneCall({
+					phoneNumber: text,
+					success: function(e) {
+						console.log(e)
+					},
+					fail: function(e) {
+						console.log(e)
+					}
+				})
 			},
 			copy(e, content, title) {
 				console.log('内容：' + content)
@@ -140,6 +156,18 @@
 				$fui.getClipboardData(content, res => {
 					this.fui.toast(`${title}复制成功`);
 				}, e);
+			},
+			sendMsg(text) {
+				uni.sendSms({
+					content: "",
+					phoneNumber: text,
+					success(e) {
+						console.log(e)
+					},
+					fail(e) {
+						console.log(e)
+					}
+				})
 			}
 		}
 	}

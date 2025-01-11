@@ -10,7 +10,7 @@
 			</fui-notice-bar>
 		</view>
 
-		<view class="fui-card__swiper-wrap">
+		<view class="fui-card__swiper-wrap" style="display: none;">
 			<fui-card>
 				<!-- 律师介绍 -->
 				<view class="fui-page__bd">
@@ -214,7 +214,7 @@
 				this.dynamicContent = `当前界面咨询人数：${this.currentNumber}`;
 			},
 			getRandomTime() {
-				return Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000; // 随机时间1秒到5秒
+				 return Math.floor(Math.random() * (90000 - 40000 + 1)) + 40000; // 随机时间40秒到90秒
 			},
 			href(type) {
 				console.log(this.imageValue)

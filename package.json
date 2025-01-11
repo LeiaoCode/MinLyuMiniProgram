@@ -13,6 +13,7 @@
 		}
 	},
 	"dependencies": {
+		"china-area-data": "^5.0.1",
 		"quill-delta-to-html": "^0.12.1"
 	}
 }

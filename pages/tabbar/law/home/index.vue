@@ -28,7 +28,9 @@
 				</view>
 			</view>
 			<!-- 咨询类型 -->
-			<view class="fui-section__title">咨询类型</view>
+			<view class="fui-section__title">咨询类型
+				<text style="color: #999;  margin-left: 10px;"> / 全域覆盖 完整类型</text>
+			</view>
 			<view style="display: none;">
 				<fui-card>
 					<fui-grid :square="false" :columns="5">
@@ -66,14 +68,17 @@
 			</view>
 
 			<!-- 推荐律师 -->
-			<view class="fui-section__title">推荐律师</view>
+			<view class="fui-section__title">推荐律师
+				<text style="color: #999;  margin-left: 10px;"> / 执业律师 实名认证</text>
+			</view>
 			<view>
 				<fui-card>
 					<view class="fui-card__wrap">
 						<fui-list-cell background="transparent" arrow :bottomBorder="false" :highlight="false"
 							:padding="['24rpx','24rpx','48rpx']">
 							<view class="fui-card__header">
-								<fui-text text="推荐律师" :size="28" fontWeight="bold"></fui-text>
+								<fui-text text="筛选全国" :size="28" type="gray" fontWeight="bold"
+									@click="onClickButton"></fui-text>
 								<fui-text text="查看全部" :size="26" type="gray" @click="hrefIndex"></fui-text>
 							</view>
 						</fui-list-cell>
@@ -96,20 +101,25 @@
 
 			<!-- 推荐案例 -->
 			<view class="fui-section__title">推荐案例</view>
-			<fui-card imageRadius="50%" title="推荐案例" color="#465CFF" tag="23小时前" :headerLine="false"
-				showBorder>
+			<fui-card imageRadius="50%" title="推荐案例" color="#465CFF" tag="23小时前" :headerLine="false" showBorder>
 				<view class="fui-list__item-card" @click="hrefTabs">
 					<image class="fui-cover" :src="`${resUrl}/cooperate/light/img_banner_3x.png`" mode="widthFix">
 					</image>
 					<view class="fui-list__title">客户提供的成功解决方案，涵盖各行业的实际应用和最佳实践。</view>
 				</view>
 			</fui-card>
+
+			<!-- 区域选择 -->
+			<fui-picker linkage :layer="2" :options="options" :show="show" @change="changeArea"
+				@cancel="cancelArea"></fui-picker>
+
 			<!-- 布局内容 end -->
 		</view>
 	</view>
 </template>
 
 <script>
+	import area from '@/area/provinces.json';
 	export default {
 		data() {
 			return {
@@ -128,100 +138,14 @@
 				},
 				resUrl: this.fui.resUrl(),
 				nums: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-				arrs: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-				templateData: [{
-					cn: '免费咨询',
-					en: 'Consulting',
-					src: 'login',
-					background: '#FFF7E5',
-					page: '/pages/nav/login-nav/login-nav'
-				}, {
-					cn: '找律师',
-					en: 'Find a lawyer',
-					src: 'education',
-					background: '#FFF4F4',
-					page: ''
-				}, ],
-				records: [{
-					avatar: '/static/images/common/logo.png',
-					name: '独留清风醉'
-				}, {
-					avatar: '/static/images/common/img_logo.png',
-					name: '醉酒鞭名马'
-				}, {
-					avatar: '/static/images/help/light/icon_assembly_3x.png',
-					name: '久居孤海'
-				}, {
-					avatar: '/static/images/common/logo.png',
-					name: '张大大'
-				}, {
-					avatar: '/static/images/common/img_logo.png',
-					name: '李思思'
-				}, {
-					avatar: '/static/images/help/light/icon_bug_3x.png',
-					name: '邹小小'
-				}, {
-					avatar: '/static/images/common/logo.png',
-					name: '独留清风醉'
-				}, {
-					avatar: '/static/images/common/img_logo.png',
-					name: '醉酒鞭名马'
-				}, {
-					avatar: '/static/images/help/light/icon_member_relevant_3x.png',
-					name: '久居孤海'
-				}],
-				menuList: [
-					[{
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '百亿补贴'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '查快递'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '实时低价'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '摇现金'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '家电清洗'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '活动日历'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '资质规则'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '限时秒杀'
-					}],
-					[{
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '签到'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '医药馆'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '断码清仓'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '爱回收'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '买车养车'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '家用电器'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '免费水果'
-					}, {
-						icon: '/static/images/common/icon_tabbar_2x.png',
-						text: '充值中心'
-					}]
-				]
+				templateData: [],
+				menuList: [],
+				show: false,
+				options: area,
+				records: [],
+				current: '',
+				current2: "",
+				practiceRegion: ''
 
 			}
 		},
@@ -231,10 +155,26 @@
 			this.getLawyers()
 		},
 		methods: {
+			onClickButton() {
+				this.show = true
+			},
+			changeArea(e) {
+				this.show = false
+				console.log(e.value[1])
+				this.practiceRegion = e.value[1]
+				this.getLawyers()
+			},
+			cancelArea() {
+				this.show = false
+				this.practiceRegion = ''
+			},
 			handleNums(e) {
-				console.log(e)
-				const url = "/pages/law/panel/panel?name=" + e.name
-				uni.fui.href(url)
+				console.log(12)
+				console.log(e._id)
+				// const url = "/pages/law/panel/panel?name=" + e.name
+				// uni.fui.href(url)
+				let url = '/pages/law/indexList/indexList-A?_id=' + e._id;
+				this.fui.href(url)
 			},
 			async getBanners() {
 				try {
@@ -266,14 +206,23 @@
 			},
 			async getLawyers() {
 				try {
-					const res = await uniCloud.database().collection('lawyers').where({
+					// 初始化查询条件
+					const query = {
 						is_featured: true
-					}).get();
+					};
+
+					// 如果存在 practiceRegion，则添加筛选条件
+					if (this.practiceRegion) {
+						query.practice_region = this.practiceRegion;
+					}
+					// 查询数据库
+					const res = await uniCloud.database().collection('lawyers').where(query).get();
 					let arr = res.result.data
 					if (arr.length) {
 						this.records = arr; // 提取 data 部分
 						console.log('查询结果:', this.records);
 					} else {
+						this.records = []
 						console.error('查询失败，没有结果:', res);
 					}
 				} catch (error) {
@@ -316,9 +265,11 @@
 				}
 			},
 			change(e) {
+				console.log(e)
 				this.current = e.detail.current;
 			},
 			change2(e) {
+				console.log(e)
 				this.current2 = e.detail.current;
 			}
 		}
