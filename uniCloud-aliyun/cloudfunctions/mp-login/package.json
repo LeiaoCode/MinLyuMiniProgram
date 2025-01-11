@@ -1,0 +1,18 @@
+{
+    "name": "mp-login",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "mplogin": "file:..\/common\/mplogin"
+    },
+    "origin-plugin-dev-name": "nx-login",
+    "origin-plugin-version": "1.0",
+    "plugin-dev-name": "nx-login",
+    "plugin-version": "1.0"
+}

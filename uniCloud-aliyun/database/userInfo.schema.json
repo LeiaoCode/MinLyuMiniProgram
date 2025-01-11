@@ -1,0 +1,52 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"type": {
+			"bsonType": "string",
+			"title": "类型",
+			"description": "信息的类型，关联 legal-categories 数据库",
+			"foreignKey": "legal-categories._id"
+		},
+		"imageValue": {
+			"bsonType": "array",
+			"title": "图片值",
+			"description": "图片的值或列表",
+			"items": {
+				"bsonType": "string"
+			}
+		},
+		"name": {
+			"bsonType": "string",
+			"title": "名称",
+			"description": "用户的名称"
+		},
+		"phone": {
+			"bsonType": "string",
+			"title": "电话",
+			"description": "用户的联系电话",
+			"pattern": "^[0-9]{10,15}$"
+		},
+		"userId": {
+			"bsonType": "string",
+			"title": "用户 ID",
+			"description": "用户的唯一标识，关联 uni-id-users 数据库",
+			"foreignKey": "uni-id-users._id"
+		},
+		"userName": {
+			"bsonType": "string",
+			"title": "用户名",
+			"description": "用户的昵称或用户名"
+		}
+	}
+}

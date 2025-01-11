@@ -1,577 +1,468 @@
 {
-  "pages": [
-    // 自定义页面 start
-    {
-      "path": "pages/tabbar/law/home/index",
-      "style": {
-        "enablePullDownRefresh": false,
-        "navigationBarTitleText": "",
-        // #ifndef MP
-        "titleNView": false,
-        // #endif
-        "navigationStyle": "custom",
-        "backgroundColor": "#FFFFFE",
-        "backgroundColorBottom": "#FFFFFF",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES",
-          "transparentTitle": "always",
-          "titlePenetrate": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/tabbar/law/my/my",
-      "style": {
-        "enablePullDownRefresh": false,
-        "navigationBarTitleText": "",
-        // #ifndef MP
-        "titleNView": false,
-        // #endif
-        "navigationStyle": "custom",
-        "backgroundColor": "#FFFFFE",
-        "backgroundColorBottom": "#FFFFFF",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES",
-          "transparentTitle": "always",
-          "titlePenetrate": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/law/indexList/indexList-A",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "在线律师",
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "navigationBarBackgroundColor": "#F1F4FA",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/law/skeleton/skeleton",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "律师详情",
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "navigationBarBackgroundColor": "#F1F4FA",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/law/vtabs/vtabs",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "法律案例",
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "navigationBarBackgroundColor": "#F1F4FA",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/law/richText/richText",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "案例详情",
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "navigationBarBackgroundColor": "#F1F4FA",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    // 自定义页面 end
-    {
-      "path": "pages/my/vip/vip",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "会员权益",
-        "enablePullDownRefresh": false,
-        "backgroundColor": "#181818",
-        "backgroundColorTop": "#181818",
-        "backgroundColorBottom": "#181818",
-        "backgroundTextStyle": "light",
-        "navigationBarTextStyle": "white",
-        "navigationBarBackgroundColor": "#181818",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/about/about",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/help/help",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "帮助中心",
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/qa/qa",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "FAQ",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/website/website",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "开源地址",
-        "enablePullDownRefresh": false,
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/updated/updated",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "功能介绍",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/log/log",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "功能介绍",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/cooperate/cooperate",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "我要合作",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/share/share",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "分享好友",
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "navigationBarBackgroundColor": "#F1F4FA",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/common/coding/coding",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "开发中",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/my/webview/webview",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "enablePullDownRefresh": false
-      }
-    },
-    {
-      "path": "pages/my/partner/partner",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "enablePullDownRefresh": false,
-        // #ifndef MP-ALIPAY
-        "navigationBarBackgroundColor": "#F1F4FA",
-        // #endif
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    // 配置如下 我的
-    {
-      "path": "pages/law/updated/updated",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "我的收藏",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    },
-    {
-      "path": "pages/law/about/about",
-      "style": {
-        // #ifdef H5
-        "titleNView": false,
-        // #endif
-        "navigationBarTitleText": "关于我们",
-        "enablePullDownRefresh": false,
-        "backgroundColorTop": "#FFFFFF",
-        "backgroundColorBottom": "#FFFFFF",
-        "backgroundColor": "#FFFFFE",
-        "mp-alipay": {
-          "allowsBounceVertical": "YES"
-        }
-      }
-    }
-  ],
-  "subPackages": [
-    {
-      "root": "pages/layout",
-      "pages": [
-        {
-          "path": "waterfall/waterfall",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "瀑布流",
-            "enablePullDownRefresh": true,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "topTab/topTab",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "顶部选项卡",
-            "enablePullDownRefresh": false,
-            "mp-weixin": {
-              "disableScroll": true
-            },
-            "app-plus": {
-              "bounce": "none"
-            },
-            "mp-alipay": {
-              "allowsBounceVertical": "NO"
-            },
-            "mp-baidu": {
-              "disableScroll": true
-            }
-          }
-        },
-        {
-          "path": "newsList/newsList",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "新闻列表",
-            "enablePullDownRefresh": true,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "productList/productList",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "商品列表",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "submitBar/submitBar",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "提交订单栏",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "goodsBar/goodsBar",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "商品导航栏",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "chatBar/chatBar",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "聊天栏",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "rollNews/rollNews",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "滚动消息",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "cardSwiper/cardSwiper",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "卡片轮播",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "map/map",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "地图示例",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "rollHor/rollHor",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "横向滚动",
-            "enablePullDownRefresh": false,
-            "mp-alipay": {
-              "allowsBounceVertical": "YES"
-            }
-          }
-        },
-        {
-          "path": "route/route",
-          "style": {
-            // #ifdef H5
-            "navigationBarTitleText": "运单轨迹-路线规划",
-            // #endif
-            // #ifndef H5
-            "navigationBarTitleText": "",
-            // #endif
-            // #ifndef MP
-            "titleNView": false,
-            // #endif
-            "navigationStyle": "custom",
-            "enablePullDownRefresh": false,
-            "mp-weixin": {
-              "disableScroll": true
-            },
-            "app-plus": {
-              "bounce": "none"
-            },
-            "mp-alipay": {
-              "allowsBounceVertical": "NO"
-            },
-            "mp-baidu": {
-              "disableScroll": true
-            }
-          }
-        },
-        {
-          "path": "markerCluster/markerCluster",
-          "style": {
-            // #ifdef H5
-            "titleNView": false,
-            // #endif
-            "navigationBarTitleText": "地图示例",
-            "enablePullDownRefresh": false,
-            "backgroundColor": "#FFFFFE",
-            "mp-weixin": {
-              "disableScroll": true
-            },
-            "app-plus": {
-              "bounce": "none"
-            },
-            "mp-alipay": {
-              "allowsBounceVertical": "NO"
-            },
-            "mp-baidu": {
-              "disableScroll": true
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "easycom": {
-    "autoscan": true,
-    "custom": {
-      "fui-(.*)": "@/components/firstui/fui-$1/fui-$1.vue"
-    }
-  },
-  "globalStyle": {
-    "backgroundTextStyle": "dark",
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "First UI",
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "backgroundColor": "#F1F4FA",
-    "backgroundColorTop": "#F1F4FA",
-    "backgroundColorBottom": "#F1F4FA",
-    "h5": {
-      "rpxCalcMaxDeviceWidth": 750,
-      // rpx 计算所支持的最大设备宽度，单位 px，默认值为 960
-      "rpxCalcBaseDeviceWidth": 375,
-      // rpx 计算使用的基准设备宽度，设备实际宽度超出 rpx 计算所支持的最大设备宽度时将按基准宽度计算，单位 px，默认值为 375
-      "rpxCalcIncludeWidth": 750
-      // rpx 计算特殊处理的值，始终按实际的设备宽度计算，单位 rpx，默认值为 750
-    }
-  },
-  "tabBar": {
-    "color": "#333333",
-    "selectedColor": "#465CFF",
-    "backgroundColor": "#FFFFFF",
-    "list": [
-      {
-        "pagePath": "pages/tabbar/law/home/index",
-        "text": "首页",
-        "iconPath": "static/images/tabbar/my_default_3x.png",
-        "selectedIconPath": "static/images/tabbar/my_selected_3x.png"
-      },
-      {
-        "pagePath": "pages/tabbar/law/my/my",
-        "text": "我",
-        "iconPath": "static/images/tabbar/my_default_3x.png",
-        "selectedIconPath": "static/images/tabbar/my_selected_3x.png"
-      }
-    ]
-  },
-  "resizable": false
+	"pages": [
+		// 自定义页面 start
+		{
+			"path": "pages/tabbar/law/home/index",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "",
+				// #ifndef MP
+				"titleNView": false,
+				// #endif
+				"navigationStyle": "custom",
+				"backgroundColor": "#FFFFFE",
+				"backgroundColorBottom": "#FFFFFF",
+				"mp-alipay": {
+					"allowsBounceVertical": "YES",
+					"transparentTitle": "always",
+					"titlePenetrate": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/tabbar/law/my/my",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "",
+				// #ifndef MP
+				"titleNView": false,
+				// #endif
+				"navigationStyle": "custom",
+				"backgroundColor": "#FFFFFE",
+				"backgroundColorBottom": "#FFFFFF",
+				"mp-alipay": {
+					"allowsBounceVertical": "YES",
+					"transparentTitle": "always",
+					"titlePenetrate": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/indexList/indexList-A",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "在线律师",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/skeleton/skeleton",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "律师详情",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/vtabs/vtabs",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "法律案例",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/vtabs/vtabs-B",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "法律案例",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/richText/richText",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "案例详情",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/panel/panel",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "快速咨询",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/result-eg/result-eg",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "提交结果",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/upload/upload",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "提交结果",
+				"enablePullDownRefresh": false,
+				// #ifndef MP-ALIPAY
+				"navigationBarBackgroundColor": "#F1F4FA",
+				// #endif
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		// 自定义页面 end
+		{
+			"path": "pages/common/coding/coding",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "开发中",
+				"enablePullDownRefresh": false,
+				"backgroundColorTop": "#FFFFFF",
+				"backgroundColorBottom": "#FFFFFF",
+				"backgroundColor": "#FFFFFE",
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		// 配置如下 我的
+		{
+			"path": "pages/law/updated/updated",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "我的收藏",
+				"enablePullDownRefresh": false,
+				"backgroundColorTop": "#FFFFFF",
+				"backgroundColorBottom": "#FFFFFF",
+				"backgroundColor": "#FFFFFE",
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		},
+		{
+			"path": "pages/law/about/about",
+			"style": {
+				// #ifdef H5
+				"titleNView": false,
+				// #endif
+				"navigationBarTitleText": "关于我们",
+				"enablePullDownRefresh": false,
+				"backgroundColorTop": "#FFFFFF",
+				"backgroundColorBottom": "#FFFFFF",
+				"backgroundColor": "#FFFFFE",
+				"mp-alipay": {
+					"allowsBounceVertical": "YES"
+				}
+			}
+		}
+	],
+	"subPackages": [{
+		"root": "pages/layout",
+		"pages": [{
+				"path": "waterfall/waterfall",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "瀑布流",
+					"enablePullDownRefresh": true,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "topTab/topTab",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "顶部选项卡",
+					"enablePullDownRefresh": false,
+					"mp-weixin": {
+						"disableScroll": true
+					},
+					"app-plus": {
+						"bounce": "none"
+					},
+					"mp-alipay": {
+						"allowsBounceVertical": "NO"
+					},
+					"mp-baidu": {
+						"disableScroll": true
+					}
+				}
+			},
+			{
+				"path": "newsList/newsList",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "新闻列表",
+					"enablePullDownRefresh": true,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "productList/productList",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "商品列表",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "submitBar/submitBar",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "提交订单栏",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "goodsBar/goodsBar",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "商品导航栏",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "chatBar/chatBar",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "聊天栏",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "rollNews/rollNews",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "滚动消息",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "cardSwiper/cardSwiper",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "卡片轮播",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "map/map",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "地图示例",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "rollHor/rollHor",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "横向滚动",
+					"enablePullDownRefresh": false,
+					"mp-alipay": {
+						"allowsBounceVertical": "YES"
+					}
+				}
+			},
+			{
+				"path": "route/route",
+				"style": {
+					// #ifdef H5
+					"navigationBarTitleText": "运单轨迹-路线规划",
+					// #endif
+					// #ifndef H5
+					"navigationBarTitleText": "",
+					// #endif
+					// #ifndef MP
+					"titleNView": false,
+					// #endif
+					"navigationStyle": "custom",
+					"enablePullDownRefresh": false,
+					"mp-weixin": {
+						"disableScroll": true
+					},
+					"app-plus": {
+						"bounce": "none"
+					},
+					"mp-alipay": {
+						"allowsBounceVertical": "NO"
+					},
+					"mp-baidu": {
+						"disableScroll": true
+					}
+				}
+			},
+			{
+				"path": "markerCluster/markerCluster",
+				"style": {
+					// #ifdef H5
+					"titleNView": false,
+					// #endif
+					"navigationBarTitleText": "地图示例",
+					"enablePullDownRefresh": false,
+					"backgroundColor": "#FFFFFE",
+					"mp-weixin": {
+						"disableScroll": true
+					},
+					"app-plus": {
+						"bounce": "none"
+					},
+					"mp-alipay": {
+						"allowsBounceVertical": "NO"
+					},
+					"mp-baidu": {
+						"disableScroll": true
+					}
+				}
+			}
+		]
+	}],
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"fui-(.*)": "@/components/firstui/fui-$1/fui-$1.vue"
+		}
+	},
+	"globalStyle": {
+		"backgroundTextStyle": "dark",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "First UI",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#F1F4FA",
+		"backgroundColorTop": "#F1F4FA",
+		"backgroundColorBottom": "#F1F4FA",
+		"h5": {
+			"rpxCalcMaxDeviceWidth": 750,
+			// rpx 计算所支持的最大设备宽度，单位 px，默认值为 960
+			"rpxCalcBaseDeviceWidth": 375,
+			// rpx 计算使用的基准设备宽度，设备实际宽度超出 rpx 计算所支持的最大设备宽度时将按基准宽度计算，单位 px，默认值为 375
+			"rpxCalcIncludeWidth": 750
+			// rpx 计算特殊处理的值，始终按实际的设备宽度计算，单位 rpx，默认值为 750
+		}
+	},
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#465CFF",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/tabbar/law/home/index",
+				"text": "首页",
+				"iconPath": "static/images/tabbar/my_default_3x.png",
+				"selectedIconPath": "static/images/tabbar/my_selected_3x.png"
+			},
+			{
+				"pagePath": "pages/tabbar/law/my/my",
+				"text": "我",
+				"iconPath": "static/images/tabbar/my_default_3x.png",
+				"selectedIconPath": "static/images/tabbar/my_selected_3x.png"
+			}
+		]
+	},
+	"resizable": false
 }

@@ -329,14 +329,27 @@
 				})
 			},
 			uploadImage(index, imgUrl, url) {
+				console.log(index, imgUrl, url)
+				// 定义文件存储路径，格式为文件夹路径加文件名
+				const fileName = `uploads/${Date.now()}_${Math.floor(Math.random() * 1000)}.jpg`;
+				console.log(fileName)
+				// 确保 formData 包含 key 字段
+				const formData = {
+					key: fileName, // OSS 中的文件路径
+				};
 				return new Promise((resolve, reject) => {
 					uni.uploadFile({
 						url: this.url || url,
 						name: this.name,
 						header: this.header,
-						formData: this.formData,
+						cloudPath:fileName,
+						// formData: this.formData,
+						// formData: formData, // 包含 key 的表单数据
 						filePath: imgUrl,
+						// filePath:'/uni-media-library',
 						success: (res) => {
+							console.log('success')
+							console.log(res)
 							if (res.statusCode === 200) {
 								this.$set(this.status, index, 'success')
 								resolve({
@@ -352,6 +365,8 @@
 							}
 						},
 						fail: (res) => {
+							console.log('12')
+							console.log(res)
 							this.$set(this.status, index, 'error')
 							// uni.showModal({
 							// 	content: JSON.stringify(res)

@@ -89,6 +89,14 @@
         "usingComponents" : true,
         "appid" : "tt00c7767a9fcdf31001",
         "scopedSlotsCompiler" : "augmented",
+        "permissions" : {
+            "scope.album" : {
+                "desc" : "图片上传需要访问相册"
+            },
+            "scope.camera" : {
+                "desc" : "图片上传需要访问相机"
+            }
+        },
         "setting" : {
             "es6" : false,
             "postcss" : true,

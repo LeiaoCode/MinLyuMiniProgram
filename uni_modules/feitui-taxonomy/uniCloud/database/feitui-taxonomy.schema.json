@@ -1,0 +1,72 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+    "bsonType": "object",
+    "required": ["name", "taxonomy"],
+    "permission": {
+        "read": true,
+        "create": false,
+        "update": false,
+        "delete": false
+    },
+    "properties": {
+        "_id": {
+            "description": "ID，系统自动生成"
+        },
+        "name": {
+            "bsonType": "string",
+            "description": "类别名称",
+            "label": "名称",
+            "trim": "both"
+        },
+        "taxonomy": {
+            "bsonType": "string",
+            "description": "category、tag、media_category等",
+            "label": "分类类型",
+            "trim": "both"
+        },
+        "description": {
+            "bsonType": "string",
+            "description": "类别描述",
+            "label": "描述",
+            "trim": "both"
+        },
+        "icon": {
+            "bsonType": "string",
+            "description": "类别图标地址",
+            "label": "图标地址",
+            "pattern": "^(http://|https://|/|./|@/)\\S",
+            "trim": "both"
+        },
+        "sort": {
+            "bsonType": "int",
+            "description": "类别显示顺序",
+            "label": "排序"
+        },
+        "count": {
+            "bsonType": "int",
+            "description": "该类别下的目标数量"
+        },
+        "parent": {
+            "bsonType": "string",
+            "title": "父节点",
+            "description": "父节点ID",
+            "foreignKey": "feitui-taxonomy._id"
+        },
+        "level": {
+            "bsonType": "int",
+            "title": "层级",
+            "defaultValue": 0
+        },
+        "path": {
+            "bsonType":"string",
+            "description": "树形排序使用"
+        },
+        "create_date": {
+            "bsonType": "timestamp",
+            "description": "创建时间",
+            "forceDefaultValue": {
+                "$env": "now"
+            }
+        }
+    }
+}
